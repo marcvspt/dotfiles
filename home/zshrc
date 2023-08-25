@@ -1,0 +1,209 @@
+# Colors
+declare -r colors_init="\e[" # Initialization
+
+## Options
+declare -r txt_regul="${colors_init}0"
+declare -r txt_bold="${colors_init}1"
+
+## Base colors
+declare -r color_red=";31m"
+declare -r color_green=";32m"
+declare -r color_yellow=";33m"
+
+declare -r colors_end="${txt_regul}m" # RESET-END COLORS
+
+## Bold text colors
+declare -r col_txt_bld_red="${txt_regul}${color_red}"
+declare -r col_txt_bld_grn="${txt_bold}${color_green}"
+declare -r col_txt_bld_ylw="${txt_bold}${color_yellow}"
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#eval "$(starship init zsh)"
+
+# for setting history length see HISTSIZE and HISTFILESIZE
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=2000
+
+# Resolve burpsuite problems
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Custom path for the user
+export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games:/usr/share/games:/usr/sandbox:/snap/bin:/root/.local/bin:/opt/bin:/root/.fzf/bin
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select() {
+	if [[ $KEYMAP == vicmd ]] || [[ $1 = 'block' ]]; then
+		echo -ne '\e[1 q'
+	elif [[ $KEYMAP == main ]] || [[ $KEYMAP == viins ]] || [[ $KEYMAP = '' ]] || [[ $1 = 'beam' ]]; then
+		echo -ne '\e[5 q'
+	fi
+}
+zle -N zle-keymap-select
+
+# Start with beam shape cursor on zsh startup and after every command.
+function zle-line-init() {
+	zle-keymap-select 'beam'
+}
+
+# Bindkeys for some shortcuts
+bindkey "^[[H" beginning-of-line #inicio
+bindkey "^[[F" end-of-line #fin
+bindkey "^[[3~" delete-char #delete
+bindkey "^[[1;3C" forward-word #alt + ->
+bindkey "^[[1;3D" backward-word #alt + <-
+bindkey '^[[1;5C' forward-word #ctrl + ->
+bindkey '^[[1;5D' backward-word #ctrl + <-
+bindkey '^[[3;5~' kill-word #ctrl + Supr
+
+# Custom alias
+alias vi='nvim'
+alias vim='nvim'
+
+alias cat='/usr/bin/bat'
+alias catn='/usr/bin/bat --style=plain'
+alias catp='/usr/bin/bat --paging=never'
+alias catnp='/usr/bin/bat --style=plain --paging=never'
+
+alias ls='/usr/bin/lsd -F --group-directories-first --color=auto'
+alias l='/usr/bin/lsd'
+alias ll='/usr/bin/lsd -lF --group-directories-first --color=auto'
+alias la='/usr/bin/lsd -AF --group-directories-first --color=auto'
+alias lla='/usr/bin/lsd -lAF --group-directories-first --color=auto'
+
+# Set colors
+## Colored 'gcc' warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+## Set colors to some commands
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias diff='diff --color=auto'
+alias ip='ip --color=auto'
+
+## Set 'man' colors
+function man() {
+	env \
+	LESS_TERMCAP_mb=$(echo -e "${col_txt_bld_red}") \
+	LESS_TERMCAP_md=$(echo -e "${col_txt_bld_red}") \
+	LESS_TERMCAP_me=$(echo -e "${colors_end}") \
+	LESS_TERMCAP_se=$(echo -e "${colors_end}") \
+	LESS_TERMCAP_so=$(echo -e "${col_txt_bld_ylw}") \
+	LESS_TERMCAP_ue=$(echo -e "${colors_end}") \
+	LESS_TERMCAP_us=$(echo -e "${col_txt_bld_grn}") \
+	man "$@"
+}
+
+## Syntax colors for zsh options and arguments
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
+ZSH_HIGHLIGHT_STYLES[redirection]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[path]='fg=magenta,bold'
+
+# Plugins
+declare -r path_plugins='/usr/share' # Change this if the path is different
+
+## Suggestion commands
+declare -r auto_sugg="$path_plugins/zsh-autosuggestions.zsh"
+if [[ -f $auto_sugg ]]; then
+	source $auto_sugg
+fi
+
+## Syntax highlight for commands
+declare -r syntax_high="$path_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ -f $syntax_high ]]; then
+	source $syntax_high
+fi
+
+## Sudo with 2*Esc
+declare -r sudo_plug='/opt/zsh-sudo/sudo.plugin.zsh'
+if [[ -f $sudo_plug ]]; then
+	source $sudo_plug
+fi
+
+# Custom functions
+## Create directories for pentesting
+function mkt() {
+	mkdir {scans,content,exploits}
+}
+
+## Extract ports from nmap -oG file
+function extract_ports() {
+	local file_name=$1
+	local ports="$(cat $file_name | grep -oP '\d{1,5}/open/[t,c,p,u,d]' | awk '{print $1}' FS='/' | xargs | tr ' ' ',')"
+	local ip_address="$(cat $file_name | grep -oP '^Host: .* \(\)' | head -n 1 | sort -u | awk '{print $2}')"
+	echo -e "\n[*] Extracting information...\n" > extractPorts.tmp
+	echo -e "\t[*] IP Address: $ip_address"  >> extractPorts.tmp
+	echo -e "\t[*] Open ports: $ports\n"  >> extractPorts.tmp
+	echo $ports | tr -d '\n' | xclip -sel clip
+	echo -e "[*] Ports copied to clipboard\n"  >> extractPorts.tmp
+	bat -l c --paging=never extractPorts.tmp; rm extractPorts.tmp
+}
+
+## Set targget host
+function set_target() {
+	local host=$1
+	local name=$2
+	echo "$host $name" > /opt/help/target
+}
+
+## Delete files extremly hard
+function rmk() {
+	scrub -p dod $1
+	shred -zun 10 -v $1
+}
+
+## PS Credential format
+function ps_credential() {
+	bat -l powershell --paging=never /opt/help/pscredential
+}
+
+## Persistence on windows
+function persistence() {
+	bat -l powershell --paging=never /opt/help/persistence
+}
+
+## Create Digital Certificate
+function create_cert() {
+	bat -l bash --paging=never /opt/help/createcert
+}
+
+## Scan near Wi-Fi signals
+function wifi_scan() {
+	nmcli dev wifi list
+}
+
+## Connect to a Wi-Fi with password and without password
+function wifi_connect() {
+	if [ $2 ]; then
+		nmcli dev wifi connect $1 password $2
+	elif [ !$2 ]; then
+		nmcli dev wifi connect $1
+	fi
+}
+
+# Stylesheet XML Bootstrap short way
+export WEBXML='--stylesheet "https://raw.githubusercontent.com/honze-net/nmap-bootstrap-xsl/master/nmap-bootstrap.xsl"'
+
+# FZF configuration
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

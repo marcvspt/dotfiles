@@ -1,0 +1,8 @@
+syntax on
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set number
+
+set laststatus=2
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [LEN=%L]
