@@ -21,6 +21,7 @@ Así com los temas de la polybar de [adi1090x](https://github.com/adi1090x/polyb
     - [Establecer fondo](#establecer-fondo)
   - [Opcional](#opcional)
     - [Atajos de aplicaciones](#atajos-de-aplicaciones)
+    - [TLD o dominio raíz personalizado en navegador web](#tld-o-dominio-raíz-personalizado-en-navegador-web)
     - [Doble monitor](#doble-monitor)
     - [Cambiar prompt](#cambiar-prompt)
     - [Configurar lightdm](#configurar-lightdm)
@@ -104,6 +105,20 @@ betterlockscreen -u /home/$user/Imágenes/Wallpapers/24.jpg # Elige el que más 
 ### Atajos de aplicaciones
 
 Se pueden modificar los atajos de teclado del entorno en el archivo [sxhkdrc](config/sxhkd/sxhkdrc). Es importante probar la configuración y al recargar el entorno ejecutar `Super + Esc`.
+
+### TLD o dominio raíz personalizado en navegador web
+
+**Nota:** *SOLO FUNCIONA EN NAVEGADORES BASADOS EN FIREFOX MOZILLA: firefox, waterfox, librewolf, etc.*
+
+Es posible configurar **TLDs** personalizados en nuestro navegador para que se resuelvan normalmente sin tomarlo como una *query* de busqueda en la web. Debemos añadir una regla booleana como *True* en `about:config` de la *URL*, por ejemplo:
+
+```url
+browser.fixup.domainsuffixwhitelist.htb
+```
+
+`.htb` es el dominio raíz como `.com`, `.io`, `.org`, etc., ahora podemos poner `searcher.htb`, `lolipop.htb`, etc., y nos dirigirá al dominio personalizado.
+
+![TLD o dominio raíz personalizado en navegador web](tld-htb-librewolf.png)
 
 ### Doble monitor
 
