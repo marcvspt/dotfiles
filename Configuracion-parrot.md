@@ -119,9 +119,9 @@ sudo apt install microsoft-edge-stable
 Para establecer el navegador web por default hacemos lo siguiente:
 
 ```bash
-sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/librwolf 210
+sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/librewolf 100
 sudo update-alternatives --config x-www-browser
-## Select librewolf
+##### Select librewolf
 ```
 
 Buscar el binario en las rutas `bin` como:

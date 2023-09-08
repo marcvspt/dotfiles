@@ -24,7 +24,7 @@ Puedes editar los scripts para eliminar las herramientas que no necesites:
 Para establecer el navegador web por default hacemos lo siguiente:
 
 ```bash
-declare -r browser='librewolf.desktop'
+browser='librewolf.desktop'
 
 sudo xdg-settings set default-web-browser $browser
 sudo xdg-settings set default-url-scheme-handler https $browser

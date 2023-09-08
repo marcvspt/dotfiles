@@ -58,6 +58,7 @@ if [ $EUID -eq 0 ]; then
     echo -e "\n${symbol_progress} ${col_txt_bld_wht}Actualizando DB ${col_txt_bld_pur}locate.${colors_end}"
     updatedb
     echo -e "\n${symbol_completed} Hecho!\n${colors_end}"
+    tput cnorm
 else
     echo -e "\n${symbol_error} ${col_txt_bld_wht}Debes ejecutar este script como root.${colors_end}\n"
     tput cnorm
