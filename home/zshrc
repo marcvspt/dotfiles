@@ -40,7 +40,7 @@ SAVEHIST=2000
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Custom path for the user
-export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games:/usr/share/games:/usr/sandbox:/snap/bin:/root/.local/bin:/opt/bin:/root/.fzf/bin
+export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/snap/bin:/usr/games:/usr/local/games:/usr/share/games:/usr/sandbox:/root/.local/bin:/opt/bin:/home/marcvs/.fzf/bin
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select() {

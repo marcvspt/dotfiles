@@ -186,4 +186,4 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games:/usr/share/games:/usr/sandbox:/snap/bin:/root/.local/bin:/opt/bin
+export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/snap/bin:/usr/games:/usr/local/games:/usr/share/games:/usr/sandbox:/root/.local/bin:/opt/bin
