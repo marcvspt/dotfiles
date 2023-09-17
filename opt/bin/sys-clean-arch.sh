@@ -13,6 +13,7 @@ declare -r color_red=";31m"
 declare -r color_green=";32m"
 declare -r color_yellow=";33m"
 declare -r color_blue=";34m"
+declare -r color_purple=";35m"
 declare -r color_white=";37m"
 
 declare -r colors_end="${txt_regul}m" # RESET-END COLORS
@@ -21,6 +22,7 @@ declare -r colors_end="${txt_regul}m" # RESET-END COLORS
 declare -r col_txt_bld_red="${txt_bold}${color_red}"
 declare -r col_txt_bld_grn="${txt_bold}${color_green}"
 declare -r col_txt_bld_ylw="${txt_bold}${color_yellow}"
+declare -r col_txt_bld_blu="${txt_bold}${color_blue}"
 declare -r col_txt_bld_pur="${txt_bold}${color_purple}"
 declare -r col_txt_bld_wht="${txt_bold}${color_white}"
 
@@ -43,7 +45,7 @@ trap signal_handler INT
 # Main
 tput civis
 if [ $EUID -eq 0 ]; then
-    pacman -Rscn $(paru -Qtdq) # puede ser "yay"
+    pacman -Rscn $(paru -Qtdq)
     pkgfile -u
     pacman -Fyy
     pacman-db-upgrade

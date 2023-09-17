@@ -39,6 +39,10 @@ Se necesitan las siguientes fuentes de [nerd fonts](https://github.com/ryanoasis
 - FantasqueSansMono
 - Iosevka
 
+Se necesita también la siguiente fuente para emojis:
+
+- [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
+
 **Nota:** En el script de instalación de **Arch** ya se contempla la instalación de las fuentes, en **Parrot** se deben instalar manualmente.
 
 ## Copiar arhcivos de configuración

@@ -136,7 +136,7 @@ sudo pacman -Syyu
 ## Virtual Box modo oscuro
 
 ```bash
-paru -S adwaita-qt5 # ARCHLINUX
+paru -S adwaita-qt5-git # ARCHLINUX
 sudo apt install -y adwaita-qt # DEBIAN/PARROT
 cp /usr/share/applications/virtualbox.desktop ~/.local/share/applications/virtualbox-dark.desktop
 ```
