@@ -17,6 +17,21 @@ Puedes editar los scripts para eliminar las herramientas que no necesites:
 ./installers/install-tools-arch.sh
 ```
 
+Instalar picom (mejor opción que con PACMAN o PARU):
+
+```bash
+sudo pacman -Syu
+sudo pacman -S meson ninja libxext libxcb pixman dbus libdbusmenu-glib libconfig libglvnd glibmm glib2 pcre pcre2 libevdev libev uthash libev libxdamage libxfixes xcb-util-renderutil libxrandr libxcomposite libimagequant libxpresent libxinerama mesa libglvnd libva
+
+cd ~/Templates
+git clone https://github.com/ibhagwan/picom.git
+cd picom/
+git submodule update --init --recursive
+meson --buildtype=release . build
+ninja -C build
+sudo ninja -C build install
+```
+
 ## Opcional
 
 ### Nevagador por default
