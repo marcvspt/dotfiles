@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-if [ /usr/bin/bspc query -N -n focused.floating > /dev/null ]; then
+if /usr/bin/bspc query -N -n focused.floating > /dev/null; then
     step=20
 else
     step=100
