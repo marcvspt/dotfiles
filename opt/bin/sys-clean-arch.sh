@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # Globarl vars
 ## Colors
@@ -35,7 +35,7 @@ declare -r symbol_completed="${col_txt_bld_grn}[*]"
 # Ctrl + c función
 function signal_handler() {
     echo -e "\n${symbol_interrupted} Exiting${colors_end}\n"
-    tput cnorm
+    /usr/bin/tput cnorm
     exit 1
 }
 
@@ -43,18 +43,20 @@ function signal_handler() {
 trap signal_handler INT
 
 # Main
-tput civis
+/usr/bin/tput civis
 if [ $EUID -eq 0 ]; then
-    pacman -Rscn $(paru -Qtdq)
-    pkgfile -u
-    pacman -Fyy
-    pacman-db-upgrade
-    echo -e "S\nS" | pacman -Scc
-    sync
+    /usr/bin/pacman -Rscn $(/usr/bin/paru -Qtdq)
+    /usr/bin/pkgfile -u
+    /usr/bin/pacman -Fyy
+    /usr/bin/pacman-db-upgrade
+    echo -e "S\nS" | /usr/bin/pacman -Scc
+    /usr/bin/sync
     echo -e "\n${symbol_progress} ${col_txt_bld_wht}Actualizando DB ${col_txt_bld_pur}locate${col_txt_bld_wht}."
-    updatedb
+    /usr/bin/updatedb
     echo -e "\n${symbol_completed} Hecho!\n${colors_end}"
+    /usr/bin/tput cnorm
 else
     echo -e "\n${symbol_error} ${col_txt_bld_wht}Debes ejecutar este script como root.${colors_end}\n"
+    /usr/bin/tput cnorm
     exit 1
 fi

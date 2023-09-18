@@ -68,8 +68,8 @@ bindkey '^[[1;5D' backward-word #ctrl + <-
 bindkey '^[[3;5~' kill-word #ctrl + Supr
 
 # Custom alias
-alias vi='nvim'
-alias vim='nvim'
+alias vi='/usr/bin/nvim'
+alias vim='/usr/bin/nvim'
 
 alias cat='/usr/bin/bat'
 alias catn='/usr/bin/bat --style=plain'
@@ -77,7 +77,7 @@ alias catp='/usr/bin/bat --paging=never'
 alias catnp='/usr/bin/bat --style=plain --paging=never'
 
 alias ls='/usr/bin/lsd -F --group-directories-first --color=auto'
-alias l='/usr/bin/lsd'
+alias l='/usr/bin/lsd -F --group-directories-first --color=auto'
 alias ll='/usr/bin/lsd -lF --group-directories-first --color=auto'
 alias la='/usr/bin/lsd -AF --group-directories-first --color=auto'
 alias lla='/usr/bin/lsd -lAF --group-directories-first --color=auto'
@@ -87,17 +87,17 @@ alias lla='/usr/bin/lsd -lAF --group-directories-first --color=auto'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 ## Set colors to some commands
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias diff='diff --color=auto'
-alias ip='ip --color=auto'
+alias dir='/usr/bin/dir --color=auto'
+alias vdir='/usr/bin/vdir --color=auto'
+alias grep='/usr/bin/grep --color=auto'
+alias fgrep='/usr/bin/fgrep --color=auto'
+alias egrep='/usr/bin/egrep --color=auto'
+alias diff='/usr/bin/diff --color=auto'
+alias ip='/usr/bin/ip --color=auto'
 
 ## Set 'man' colors
 function man() {
-	env \
+	/usr/bin/env \
 	LESS_TERMCAP_mb=$(echo -e "${col_txt_bld_red}") \
 	LESS_TERMCAP_md=$(echo -e "${col_txt_bld_red}") \
 	LESS_TERMCAP_me=$(echo -e "${colors_end}") \
@@ -144,20 +144,21 @@ fi
 # Custom functions
 ## Create directories for pentesting
 function mkt() {
-	mkdir {scans,content,exploits}
+	/usr/bin/mkdir {scans,content,exploits}
 }
 
 ## Extract ports from nmap -oG file
 function extract_ports() {
 	local file_name=$1
-	local ports="$(cat $file_name | grep -oP '\d{1,5}/open/[t,c,p,u,d]' | awk '{print $1}' FS='/' | xargs | tr ' ' ',')"
-	local ip_address="$(cat $file_name | grep -oP '^Host: .* \(\)' | head -n 1 | sort -u | awk '{print $2}')"
+	local ports="$(/usr/bin/cat $file_name | /usr/bin/grep -oP '\d{1,5}/open/[t,c,p,u,d]' | /usr/bin/awk '{print $1}' FS='/' | /usr/bin/xargs | /usr/bin/tr ' ' ',')"
+	local ip_address="$(/usr/bin/cat $file_name | /usr/bin/grep -oP '^Host: .* \(\)' | /usr/bin/head -n 1 | /usr/bin/sort -u | /usr/bin/awk '{print $2}')"
 	echo -e "\n[*] Extracting information...\n" > extractPorts.tmp
 	echo -e "\t[*] IP Address: $ip_address"  >> extractPorts.tmp
 	echo -e "\t[*] Open ports: $ports\n"  >> extractPorts.tmp
-	echo $ports | tr -d '\n' | xclip -sel clip
+	echo $ports | /usr/bin/tr -d '\n' | /usr/bin/xclip -sel clip
 	echo -e "[*] Ports copied to clipboard\n"  >> extractPorts.tmp
-	bat -l c --paging=never extractPorts.tmp; rm extractPorts.tmp
+	/usr/bin/bat -l c --paging=never extractPorts.tmp
+	/usr/bin/rm extractPorts.tmp
 }
 
 ## Set targget host
@@ -169,36 +170,36 @@ function set_target() {
 
 ## Delete files extremly hard
 function rmk() {
-	scrub -p dod $1
-	shred -zun 10 -v $1
+	/usr/bin/scrub -p dod $1
+	/usr/bin/shred -zun 10 -v $1
 }
 
 ## PS Credential format
 function ps_credential() {
-	bat -l powershell --paging=never /opt/help/pscredential
+	/usr/bin/bat -l powershell --paging=never /opt/help/pscredential
 }
 
 ## Persistence on windows
 function persistence() {
-	bat -l powershell --paging=never /opt/help/persistence
+	/usr/bin/bat -l powershell --paging=never /opt/help/persistence
 }
 
 ## Create Digital Certificate
 function create_cert() {
-	bat -l bash --paging=never /opt/help/createcert
+	/usr/bin/bat -l bash --paging=never /opt/help/createcert
 }
 
 ## Scan near Wi-Fi signals
 function wifi_scan() {
-	nmcli dev wifi list
+	/usr/bin/nmcli dev wifi list
 }
 
 ## Connect to a Wi-Fi with password and without password
 function wifi_connect() {
 	if [ $2 ]; then
-		nmcli dev wifi connect $1 password $2
+		/usr/bin/nmcli dev wifi connect $1 password $2
 	elif [ !$2 ]; then
-		nmcli dev wifi connect $1
+		/usr/bin/nmcli dev wifi connect $1
 	fi
 }
 

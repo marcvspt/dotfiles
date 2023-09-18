@@ -54,14 +54,14 @@ shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/usr/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-	debian_chroot=$(cat /etc/debian_chroot)
+	debian_chroot=$(/usr/bin/cat /etc/debian_chroot)
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
@@ -77,7 +77,7 @@ esac
 #force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-	if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	if [ -x /usr/bin/tput ] && /usr/bin/tput setaf 1 >&/dev/null; then
 		# We have color support; assume it's compliant with Ecma-48
 		# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
 		# a case would tend to support setf rather than setaf.)
@@ -89,7 +89,7 @@ fi
 
 # PROMPT CONFIGURATION
 ## Use starship
-#eval "$(starship init bash)"
+#eval "$(/usr/bin/starship init bash)"
 
 ## Prompt for debian, ubuntu, etc.
 if [ "$color_prompt" = yes ]; then
@@ -124,14 +124,14 @@ esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-	alias ls='ls -CF --color=auto'
-	alias dir='dir --color=auto'
-	alias vdir='vdir --color=auto'
+	test -r ~/.dircolors && eval "$(/usr/bin/dircolors -b ~/.dircolors)" || eval "$(/usr/bin/dircolors -b)"
+	alias ls='/usr/bin/ls -CF --color=auto'
+	alias dir='/usr/bin/dir --color=auto'
+	alias vdir='/usr/bin/vdir --color=auto'
 
-	alias grep='grep --color=auto'
-	alias fgrep='fgrep --color=auto'
-	alias egrep='egrep --color=auto'
+	alias grep='/usr/bin/grep --color=auto'
+	alias fgrep='/usr/bin/fgrep --color=auto'
+	alias egrep='/usr/bin/egrep --color=auto'
 fi
 
 # Some more 'ls' aliases
@@ -145,11 +145,11 @@ alias lla='ls -lA'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 ## Colored 'ip' command
-alias ip='ip --color=auto'
+alias ip='/usr/bin/ip --color=auto'
 
 ## Set 'man' colors
 function man() {
-	env \
+	/usr/bin/env \
 	LESS_TERMCAP_mb=$(echo -e "${col_txt_bld_red}") \
 	LESS_TERMCAP_md=$(echo -e "${col_txt_bld_red}") \
 	LESS_TERMCAP_me=$(echo -e "${colors_end}") \
@@ -161,10 +161,10 @@ function man() {
 }
 
 # Some more 'ls' aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls'
-alias lla='ls -lA'
+alias ll='/usr/bin/ls -l'
+alias la='/usr/bin/ls -A'
+alias l='/usr/bin/ls'
+alias lla='/usr/bin/ls -lA'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like

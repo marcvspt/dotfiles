@@ -13,7 +13,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 # Launch the bar
 polybar -q main -c "$DIR"/config.ini &
 
-my_laptop_external_monitor=$(xrandr --query | grep 'HDMI-1')
+my_laptop_external_monitor=$(/usr/bin/xrandr --query | /usr/bin/grep 'HDMI-1')
 if [[ $my_laptop_external_monitor != *disconnected* ]]; then
   polybar secondary -c "$DIR"/config.ini &
 fi

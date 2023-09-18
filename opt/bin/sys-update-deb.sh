@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # Globarl vars
 ## Colors
@@ -33,7 +33,7 @@ declare -r symbol_completed="${col_txt_bld_grn}[*]"
 # Ctrl + c función
 function signal_handler() {
     echo -e "\n${symbol_interrupted} Exiting${colors_end}\n"
-    tput cnorm
+    /usr/bin/tput cnorm
     exit 1
 }
 
@@ -46,21 +46,21 @@ export DEBIAN_FRONTEND="noninteractive"
 export DEBIAN_PRIORITY="critical"
 export DEBCONF_NOWARNINGS="yes"
 
-tput civis
+/usr/bin/tput civis
 if [ $EUID -eq 0 ]; then
-    apt update -y || echo -e "${symbol_error} ${col_txt_bld_wht}Error al actualizar las listas de índices."
-    dpkg --configure -a || echo -e "${symbol_error} ${col_txt_bld_wht}Error al solucionar las actualizaciones interrumpidas."
-    apt --fix-broken --fix-missing install || echo -e "${symbol_error} ${col_txt_bld_wht}Error al solucionar los conflictos."
-    apt -y --fix-broken --fix-missing full-upgrade
-    apt -y full-upgrade
-    apt autoremove -y
-    apt autoclean -y
+    /usr/bin/apt update -y || echo -e "${symbol_error} ${col_txt_bld_wht}Error al actualizar las listas de índices."
+    /usr/bin/dpkg --configure -a || echo -e "${symbol_error} ${col_txt_bld_wht}Error al solucionar las actualizaciones interrumpidas."
+    /usr/bin/apt --fix-broken --fix-missing install || echo -e "${symbol_error} ${col_txt_bld_wht}Error al solucionar los conflictos."
+    /usr/bin/apt -y --fix-broken --fix-missing full-upgrade
+    /usr/bin/apt -y full-upgrade
+    /usr/bin/apt autoremove -y
+    /usr/bin/apt autoclean -y
     echo -e "\n${symbol_progress} ${col_txt_bld_wht}Actualizando DB ${col_txt_bld_pur}locate.${colors_end}"
-    updatedb
+    /usr/bin/updatedb
     echo -e "\n${symbol_completed} Hecho!\n${colors_end}"
-    tput cnorm
+    /usr/bin/tput cnorm
 else
     echo -e "\n${symbol_error} ${col_txt_bld_wht}Debes ejecutar este script como root.${colors_end}\n"
-    tput cnorm
+    /usr/bin/tput cnorm
     exit 1
 fi

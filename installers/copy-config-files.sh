@@ -1,15 +1,15 @@
-#!/bin/bash
+#!/usr/bin/bash
 
-declare -r user=$(whoami)
+declare -r user=$(/usr/bin/whoami)
 
-cp -r ./config/htop ~/.config/htop
-cp -r ./config/kitty ~/.config/kitty
-cp -r ./config/bspwm ~/.config/bspwm
-cp -r ./config/sxhkd ~/.config/sxhkd
-cp -r ./config/picom ~/.config/picom
-cp -r ./config/polybar ~/.config/polybar
-cp -r ./config/starship.toml ~/.config/starship.toml
+/usr/bin/cp -r ./config/htop /home/$user/.config/htop
+/usr/bin/cp -r ./config/kitty /home/$user/.config/kitty
+/usr/bin/cp -r ./config/bspwm /home/$user/.config/bspwm
+/usr/bin/cp -r ./config/sxhkd /home/$user/.config/sxhkd
+/usr/bin/cp -r ./config/picom /home/$user/.config/picom
+/usr/bin/cp -r ./config/polybar /home/$user/.config/polybar
+/usr/bin/cp -r ./config/starship.toml /home/$user/.config/starship.toml
 
-sudo ln -s -f /home/$user/config/htop/ /root/.config/
-sudo ln -s -f /home/$user/config/kitty/ /root/.config/
-sudo ln -s -f /home/$user/config/starship.toml /root/.config/starship.toml
+/usr/bin/sudo /usr/bin/ln -s -f /home/$user/config/htop/ /root/.config/
+/usr/bin/sudo /usr/bin/ln -s -f /home/$user/config/kitty/ /root/.config/
+/usr/bin/sudo /usr/bin/ln -s -f /home/$user/config/starship.toml /root/.config/starship.toml
