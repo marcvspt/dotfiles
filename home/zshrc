@@ -124,7 +124,7 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=magenta,bold'
 declare -r path_plugins='/usr/share' # Change this if the path is different
 
 ## Suggestion commands
-declare -r auto_sugg="$path_plugins/zsh-autosuggestions.zsh"
+declare -r auto_sugg="$path_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 if [[ -f $auto_sugg ]]; then
 	source $auto_sugg
 fi
