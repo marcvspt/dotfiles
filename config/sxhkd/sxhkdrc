@@ -4,11 +4,11 @@
 
 # terminal emulator
 super + Return
-	kitty
+	/usr/bin/kitty
 
 # program launcher
 super + d
-	rofi -show drun -theme $HOME/.config/polybar/forest/scripts/rofi/launcher.rasi
+	/usr/bin/rofi -show drun -theme $HOME/.config/polybar/forest/scripts/rofi/launcher.rasi
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -128,32 +128,36 @@ super + alt + {Left,Down,Up,Right}
 
 # edge/browser
 super + ctrl + e
-	microsoft-edge-stable
+	/usr/bin/microsoft-edge-stable
 
 # librewolf/browser
 super + ctrl + l
-	librewolf
+	/usr/bin/librewolf
 
 # burpsuite
 super + ctrl + b
-	burpsuite
+	/usr/bin/burpsuite
 
 # vscode
 super + ctrl + v
-	code
+	/usr/bin/code
 
-# caja/fileExplorer
-super + ctrl + c
-	caja
+# obsidian
+super + ctrl + o
+    /usr/bin/obsidian
+
+# thunar/fileExplorer
+super + ctrl + t
+	/usr/bin/thunar
 
 # lockscreen
 super + ctrl + x
-	betterlockscreen -l dim
+	/usr/bin/betterlockscreen -l dim
 
 # flameshot/screenshot
 #super + ctrl + p
 @Print
-	flameshot gui
+	/usr/bin/flameshot gui
 
 # Volume
 XF86AudioLowerVolume
