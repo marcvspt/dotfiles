@@ -146,9 +146,9 @@ super + ctrl + v
 super + ctrl + o
     /usr/bin/obsidian
 
-# thunar/fileExplorer
-super + ctrl + t
-	/usr/bin/thunar
+# caja/fileExplorer
+super + ctrl + c
+	/usr/bin/caja
 
 # lockscreen
 super + ctrl + x
