@@ -1,8 +1,8 @@
-# Configuraciones para ParrotOS
+# Configuraciones para Parrot y Kali
 
 Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md). Para distrubiciones como **Debian** y **Fedora** tenemos [Configuracion extra](Configuracion-extra.md).
 
-- [Configuraciones para ParrotOS](#configuraciones-para-parrotos)
+- [Configuraciones para Parrot y Kali](#configuraciones-para-parrot-y-kali)
   - [Instalar software del sistema](#instalar-software-del-sistema)
   - [Software que no estan en APT](#software-que-no-estan-en-apt)
     - [Instalación manual](#instalación-manual)
@@ -15,26 +15,23 @@ Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md). Par
 ## Instalar software del sistema
 
 ```bash
-./installers/install-tools-parrot.sh
+./installers/install-tools-kali-parrot.sh
 ```
 
 ## Software que no estan en APT
 
 ### Instalación manual
 
-- [kitty (latest)](https://github.com/kovidgoyal/kitty/releases)
 - [starship](https://starship.rs/es-ES/guide/#%F0%9F%9A%80-instalacion)
-- [python2-pip](README-extra.md#descargar-pip2)
-- [bat (latest)](https://github.com/sharkdp/bat/releases)
-- [lsd](https://github.com/lsd-rs/lsd/releases)
+- [python2-pip](Configuracion-extra#descargar-pip2)
 - [neovim (latest)](https://github.com/neovim/neovim/releases)
-- [CrackMapExec (latest)](https://wiki.porchetta.industries/getting-started/installation/installation-on-unix#python-package)
+- [docker y docker-compose]()
 
 Instalar picom (mejor opción que con APT):
 
 ```bash
 sudo apt update
-sudo apt install meson libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev libxcb-glx0-dev libpcre3-dev
+sudo apt install meson libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev libxcb-glx0-dev libpcre3-dev libev4
 
 cd ~/Templates
 git clone https://github.com/ibhagwan/picom.git

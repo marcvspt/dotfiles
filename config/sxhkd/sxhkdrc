@@ -144,11 +144,11 @@ super + ctrl + v
 
 # obsidian
 super + ctrl + o
-    /usr/bin/obsidian
+	/usr/bin/obsidian
 
-# caja/fileExplorer
+# thunar/fileExplorer
 super + ctrl + c
-	/usr/bin/caja
+	/usr/bin/thunar
 
 # lockscreen
 super + ctrl + x

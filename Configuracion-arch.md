@@ -1,6 +1,6 @@
 # Configuración ArchLinux
 
-Para **Parrot** siga los pasos de [Configuracion parrot](Configuracion-parrot.md). Para distrubiciones como **Debian** y **Fedora** tenemos [Configuracion extra](Configuracion-extra.md).
+Para **Parrot** y **Kali** siga los pasos de [Configuracion Parrot y Kali](Configuracion-parrot-kali.md). Para distrubiciones como **Debian** y **Fedora** tenemos [Configuracion extra](Configuracion-extra.md).
 
 - [Configuración ArchLinux](#configuración-archlinux)
   - [Instalar software del sistema](#instalar-software-del-sistema)

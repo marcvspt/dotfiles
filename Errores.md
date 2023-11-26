@@ -39,7 +39,7 @@ En versiones antiguas de `bat`, el comando es `batcat`, por lo que hay que susti
 
 ### Plugins no funcinan en Arch
 
-En **Arch** las rutas de los plugins de zsh son diferentes a la que tenemos configuradas en el [zshrc](home/zshrc), ya que está diseñado para parrot. Para solucionarlo solo hay que cambiar la variable `path_plugins`:
+En **Arch** las rutas de los plugins de zsh son diferentes a la que tenemos configuradas en el [zshrc](home/zshrc), ya que está diseñado para **Parrot** y **Kali**. Para solucionarlo solo hay que cambiar la variable `path_plugins`:
 
 ```bash
 declare -r path_plugins='/usr/share/zsh/plugins'

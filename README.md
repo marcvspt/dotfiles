@@ -29,7 +29,7 @@ Así com los temas de la polybar de [adi1090x](https://github.com/adi1090x/polyb
 
 ## Instalar software del sistema
 
-Para **Parrot** siga los pasos de [Configuracion parrot](Configuracion-parrot.md). Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md). Para distrubiciones como **Debian** y **Fedora** tenemos [Configuracion extra](Configuracion-extra.md).
+Para **Parrot** y **Kali** siga los pasos de [Configuracion Parrot y Kali](Configuracion-parrot-kali.md). Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md). Para distrubiciones como **Debian** y **Fedora** tenemos [Configuracion extra](Configuracion-extra.md).
 
 ## Fuentes
 
