@@ -51,7 +51,7 @@ El plugin de `sudo` está configurado para resolver a la ruta `/opt/zsh-sudo`, s
 
 ### IP de la interaz
 
-Si el **LANIP** no aparece se necesita cambiar las interfaces `enp0s3` (**iface_eth**) de la conexión Ethernet y `wlan0` (**iface_wifi**) de la conexión inalámbrica en [**BSPWM script**](opt/bin/lan-ip.sh). Compruebe estas interfaces con `ifconfig` o `ip a`.
+Si el **LANIP** no aparece se necesita cambiar las interfaces `eth0` (**iface_eth**) de la conexión Ethernet y `wlan0` (**iface_wifi**) de la conexión inalámbrica en [**BSPWM script**](opt/bin/lan-ip.sh). Compruebe estas interfaces con `ifconfig` o `ip a`.
 
 ### La bateria no se muestra
 
