@@ -24,8 +24,9 @@ Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md). Par
 
 - [starship](https://starship.rs/es-ES/guide/#%F0%9F%9A%80-instalacion)
 - [python2-pip](Configuracion-extra#descargar-pip2)
-- [neovim (latest)](https://github.com/neovim/neovim/releases)
-- [docker y docker-compose]()
+- [neovim (latest)](https://github.com/neovim/neovim/wiki/Building-Neovim#quick-start)
+- [bat](https://github.com/sharkdp/bat/releases)
+- [lsd](https://github.com/lsd-rs/lsd)
 
 Instalar picom (mejor opción que con APT):
 
