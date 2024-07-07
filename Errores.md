@@ -39,7 +39,7 @@ En versiones antiguas de `bat`, el comando es `batcat`, por lo que hay que susti
 
 ### Plugins no funcinan en Arch
 
-En **Arch** las rutas de los plugins de zsh son diferentes a la que tenemos configuradas en el [zshrc](home/zshrc), ya que está diseñado para **Parrot** y **Kali**. Para solucionarlo solo hay que cambiar la variable `path_plugins`:
+En **Arch** las rutas de los plugins de zsh son diferentes a la que tenemos configuradas en el [zshrc](home/zshrc), ya que está diseñado para **Kali**. Para solucionarlo solo hay que cambiar la variable `path_plugins`:
 
 ```bash
 declare -r path_plugins='/usr/share/zsh/plugins'
@@ -82,7 +82,7 @@ El problema de algunas apps es su `.desktop`, ya que algunos de sus valores `Exe
 - Copiar el `.desktop` de `/usr/share/applications/` a nuestro `~/.local/share/applicactions` con un nombre similar. Ej:
 
 ```bash
-cp /usr/share/applications/parrot-wireshark.desktop ~/.local/share/applications/modified-wireshark.desktop
+cp /usr/share/applications/wireshark.desktop ~/.local/share/applications/modified-wireshark.desktop
 ```
 
 - Modificar el nombre a uno similar pero haciendo referencia a que es el modificado. Ej:
@@ -137,7 +137,7 @@ sudo pacman -Syyu
 
 ```bash
 paru -S adwaita-qt5-git # ARCHLINUX
-sudo apt install -y adwaita-qt # DEBIAN/PARROT
+sudo apt install -y adwaita-qt # DEBIAN/KALI
 cp /usr/share/applications/virtualbox.desktop ~/.local/share/applications/virtualbox-dark.desktop
 ```
 

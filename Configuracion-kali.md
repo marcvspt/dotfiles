@@ -1,8 +1,8 @@
-# Configuraciones para Parrot y Kali
+# Configuraciones para Kali
 
 Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md). Para distrubiciones como **Debian** y **Fedora** tenemos [Configuracion extra](Configuracion-extra.md).
 
-- [Configuraciones para Parrot y Kali](#configuraciones-para-parrot-y-kali)
+- [Configuraciones para Kali](#configuraciones-para-kali)
   - [Instalar software del sistema](#instalar-software-del-sistema)
   - [Software que no estan en APT](#software-que-no-estan-en-apt)
     - [Instalación manual](#instalación-manual)
@@ -15,7 +15,7 @@ Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md). Par
 ## Instalar software del sistema
 
 ```bash
-./installers/install-tools-kali-parrot.sh
+./installers/install-tools-kali.sh
 ```
 
 ## Software que no estan en APT

@@ -29,7 +29,7 @@ Así com los temas de la polybar de [adi1090x](https://github.com/adi1090x/polyb
 
 ## Instalar software del sistema
 
-Para **Parrot** y **Kali** siga los pasos de [Configuracion Parrot y Kali](Configuracion-parrot-kali.md). Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md). Para distrubiciones como **Debian** y **Fedora** tenemos [Configuracion extra](Configuracion-extra.md).
+Para **Kali** siga los pasos de [Configuracion para Kali](Configuracion-kali.md). Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md). Para distrubiciones como **Debian** y **Fedora** tenemos [Configuracion extra](Configuracion-extra.md).
 
 ## Fuentes
 
@@ -43,7 +43,7 @@ Se necesita también la siguiente fuente para emojis:
 
 - [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
 
-**Nota:** En el script de instalación de **Arch** ya se contempla la instalación de las fuentes, en **Parrot** se deben instalar manualmente.
+**Nota:** En el script de instalación de **Arch** ya se contempla la instalación de las fuentes, en **Kali** se deben instalar manualmente.
 
 ## Copiar arhcivos de configuración
 

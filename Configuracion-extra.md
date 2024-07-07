@@ -1,6 +1,6 @@
 # Configuración extra
 
-Para **Parrot** y **Kali** siga los pasos de [Configuracion Parrot y Kali](Configuracion-parrot-kali.md). Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md).
+Para **Kali** siga los pasos de [Configuracion Kali](Configuracion-kali.md). Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md).
 
 - [Configuración extra](#configuración-extra)
   - [DEBIAN](#debian)
