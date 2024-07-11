@@ -10,6 +10,6 @@ declare -r user=$(/usr/bin/whoami)
 /usr/bin/cp -r ./config/polybar /home/$user/.config/polybar
 /usr/bin/cp -r ./config/starship.toml /home/$user/.config/starship.toml
 
-/usr/bin/sudo /usr/bin/ln -s -f /home/$user/config/htop/ /root/.config/
-/usr/bin/sudo /usr/bin/ln -s -f /home/$user/config/kitty/ /root/.config/
-/usr/bin/sudo /usr/bin/ln -s -f /home/$user/config/starship.toml /root/.config/starship.toml
+/usr/bin/sudo /usr/bin/ln -s -f /home/$user/.config/htop/ /root/.config/
+/usr/bin/sudo /usr/bin/ln -s -f /home/$user/.config/kitty/ /root/.config/
+/usr/bin/sudo /usr/bin/ln -s -f /home/$user/.config/starship.toml /root/.config/starship.toml
