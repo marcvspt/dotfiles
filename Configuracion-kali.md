@@ -9,7 +9,6 @@ Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md). Par
     - [Instalación por repositorios](#instalación-por-repositorios)
   - [Opcional](#opcional)
     - [Nevagador por default](#nevagador-por-default)
-    - [Software extra](#software-extra)
   - [Errores y soluciones](#errores-y-soluciones)
 
 ## Instalar software del sistema
@@ -23,10 +22,8 @@ Para **Arch** siga los pasos de [Configuracion arch](Configuracion-arch.md). Par
 ### Instalación manual
 
 - [starship](https://starship.rs/es-ES/guide/#%F0%9F%9A%80-instalacion)
-- [python2-pip](Configuracion-extra#descargar-pip2)
-- [neovim (latest)](https://github.com/neovim/neovim/wiki/Building-Neovim#quick-start)
-- [bat](https://github.com/sharkdp/bat/releases)
-- [lsd](https://github.com/lsd-rs/lsd)
+- [python2-pip](Configuracion-extra.md#descargar-pip2)
+- [neovim (latest)](https://github.com/neovim/neovim-releases/releases)
 
 Instalar picom (mejor opción que con APT):
 
@@ -41,13 +38,6 @@ git submodule update --init --recursive
 meson --buildtype=release . build
 ninja -C build
 sudo ninja -C build install
-```
-
-Instalar `evil-winrm` y `wpscan`:
-
-```bash
-sudo gem install wpscan
-sudo gem install evil-winrm
 ```
 
 ### Instalación por repositorios
@@ -110,6 +100,19 @@ sudo apt update
 sudo apt install microsoft-edge-stable
 ```
 
+Instalar `spotify`:
+
+```bash
+sudo apt update
+sudo apt install dirmngr
+
+curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+
+sudo apt update
+sudo apt install spotify-client
+```
+
 ## Opcional
 
 ### Nevagador por default
@@ -130,26 +133,6 @@ Buscar el binario en las rutas `bin` como:
 - `/sbin`
 - `/usr/sbin`
 - `/usr/local/sbin`
-
-### Software extra
-
-```bash
-sudo apt update
-sudo apt install brightnessctl cbatticon libreoffice libreoffice-l10n-es libreoffice-help-es
-```
-
-Instalar `spotify`:
-
-```bash
-sudo apt update
-sudo apt install dirmngr
-
-curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
-echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-
-sudo apt update
-sudo apt install spotify-client
-```
 
 ## Errores y soluciones
 

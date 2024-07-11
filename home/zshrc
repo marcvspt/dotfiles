@@ -71,16 +71,36 @@ bindkey '^[[3;5~' kill-word #ctrl + Supr
 alias vi='/usr/bin/nvim'
 alias vim='/usr/bin/nvim'
 
-alias cat='/usr/bin/bat'
-alias catn='/usr/bin/bat --style=plain'
-alias catp='/usr/bin/bat --paging=never'
-alias catnp='/usr/bin/bat --style=plain --paging=never'
+if command -v bat >/dev/null 2>&1; then
+    alias cat='/usr/bin/bat'
+    alias catn='/usr/bin/bat --style=plain'
+    alias catp='/usr/bin/bat --paging=never'
+    alias catnp='/usr/bin/bat --style=plain --paging=never'
+elif command -v batcat >/dev/null 2>&1; then
+    alias cat='/usr/bin/batcat'
+    alias catn='/usr/bin/batcat --style=plain'
+    alias catp='/usr/bin/batcat --paging=never'
+    alias catnp='/usr/bin/batcat --style=plain --paging=never'
+else
+    : # Nada
+fi
 
-alias ls='/usr/bin/lsd -F --group-directories-first --color=auto'
-alias l='/usr/bin/lsd -F --group-directories-first --color=auto'
-alias ll='/usr/bin/lsd -lF --group-directories-first --color=auto'
-alias la='/usr/bin/lsd -AF --group-directories-first --color=auto'
-alias lla='/usr/bin/lsd -lAF --group-directories-first --color=auto'
+if command -v lsd >/dev/null 2>&1; then
+	alias ls='/usr/bin/lsd -F --group-directories-first --color=auto'
+	alias ll='/usr/bin/lsd -lF --group-directories-first --color=auto'
+	alias la='/usr/bin/lsd -AF --group-directories-first --color=auto'
+	alias lla='/usr/bin/lsd -lAF --group-directories-first --color=auto'
+else
+	alias ls='/usr/bin/ls -CF --group-directories-first --color=auto'
+	alias ll='/usr/bin/ls -lCF --group-directories-first --color=auto'
+	alias la='/usr/bin/ls -ACF --group-directories-first --color=auto'
+	alias lla='/usr/bin/ls -lACF --group-directories-first --color=auto'
+fi
+
+alias zshconfig="/usr/bin/nvim ~/.zshrc"
+alias cp="/bin/cp -i"
+alias mv="/bin/mv -i"
+alias rm="/bin/rm -i"
 
 # Set colors
 ## Colored 'gcc' warnings and errors
@@ -141,6 +161,12 @@ if [[ -f $sudo_plug ]]; then
 	source $sudo_plug
 fi
 
+## Git commands aliases
+declare -r git_plug='/opt/zsh-git/git.plugin.zsh'
+if [[ -f $git_plug ]]; then
+	source $git_plug
+fi
+
 # Custom functions
 ## Create directories for pentesting
 function mkt() {
@@ -157,7 +183,15 @@ function extract_ports() {
 	echo -e "\t[*] Open ports: $ports\n"  >> extractPorts.tmp
 	echo $ports | /usr/bin/tr -d '\n' | /usr/bin/xclip -sel clip
 	echo -e "[*] Ports copied to clipboard\n"  >> extractPorts.tmp
-	/usr/bin/bat -l c --paging=never extractPorts.tmp
+
+	if command -v bat >/dev/null 2>&1; then
+		/usr/bin/bat -l c --paging=never extractPorts.tmp
+	elif command -v batcat >/dev/null 2>&1; then
+		/usr/bin/batcat -l c --paging=never extractPorts.tmp
+	else
+		/usr/bin/cat extractPorts.tmp
+	fi
+
 	/usr/bin/rm extractPorts.tmp
 }
 
@@ -176,17 +210,35 @@ function rmk() {
 
 ## PS Credential format
 function ps_credential() {
-	/usr/bin/bat -l powershell --paging=never /opt/help/pscredential
+	if command -v bat >/dev/null 2>&1; then
+		/usr/bin/bat -l powershell --paging=never /opt/help/pscredential
+	elif command -v batcat >/dev/null 2>&1; then
+		/usr/bin/batcat -l powershell --paging=never /opt/help/pscredential
+	else
+		/usr/bin/cat /opt/help/pscredential
+	fi
 }
 
 ## Persistence on windows
 function persistence() {
-	/usr/bin/bat -l powershell --paging=never /opt/help/persistence
+	if command -v bat >/dev/null 2>&1; then
+		/usr/bin/bat -l powershell --paging=never /opt/help/persistence
+	elif command -v batcat >/dev/null 2>&1; then
+		/usr/bin/batcat -l powershell --paging=never /opt/help/persistence
+	else
+		/usr/bin/cat /opt/help/persistence
+	fi
 }
 
 ## Create Digital Certificate
 function create_cert() {
-	/usr/bin/bat -l bash --paging=never /opt/help/createcert
+	if command -v bat >/dev/null 2>&1; then
+		/usr/bin/bat -l powershell --paging=never /opt/help/createcert
+	elif command -v batcat >/dev/null 2>&1; then
+		/usr/bin/batcat -l powershell --paging=never /opt/help/createcert
+	else
+		/usr/bin/cat /opt/help/createcert
+	fi
 }
 
 ## Scan near Wi-Fi signals

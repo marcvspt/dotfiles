@@ -63,9 +63,10 @@ Si existen errores o no funciona la **Polybar** consultar la sección [Polybar](
 Recuerda instalar:
 
 - [**powerlevel10k**](https://github.com/romkatv/powerlevel10k#manual).
-- [**fzf**](https://github.com/junegunn/fzf#using-git).
-- [**NvChad**](https://nvchad.com/docs/quickstart/install).
-- [**ZSH sudo plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh).
+- [**fzf**](https://github.com/junegunn/fzf#using-git)
+- [**NvChad**](https://nvchad.com/docs/quickstart/install)
+- [**ZSH sudo plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh)
+- [**ZSH git plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh)
 
 ### Crear links simbólicos
 

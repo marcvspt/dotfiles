@@ -135,10 +135,9 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Some more 'ls' aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls'
-alias lla='ls -lA'
+alias ll='ls -lCF'
+alias la='ls -ACF'
+alias lla='ls -lACF'
 
 # Set colors
 ## Colored 'gcc' warnings and errors
@@ -159,12 +158,6 @@ function man() {
 	LESS_TERMCAP_us=$(echo -e "${col_txt_bld_grn}") \
 	man "$@"
 }
-
-# Some more 'ls' aliases
-alias ll='/usr/bin/ls -l'
-alias la='/usr/bin/ls -A'
-alias l='/usr/bin/ls'
-alias lla='/usr/bin/ls -lA'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
