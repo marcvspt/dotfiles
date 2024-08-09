@@ -164,6 +164,7 @@ fi
 ## Git commands aliases
 declare -r git_plug='/opt/zsh-git/git.plugin.zsh'
 if [[ -f $git_plug ]]; then
+	autoload -Uz compinit && compinit
 	source $git_plug
 fi
 
