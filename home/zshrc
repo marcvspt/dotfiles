@@ -1,73 +1,172 @@
-# Colors
-declare -r colors_init="\e[" # Initialization
+# Variables
+## Colores
+### Globales
+colors_init="\e["
+txt_regul="${colors_init}0"
+txt_bold="${colors_init}1"
+color_red=";31m"
+color_green=";32m"
+color_yellow=";33m"
+colors_end="${txt_regul}m"
+col_txt_bld_red="${txt_regul}${color_red}"
+col_txt_bld_grn="${txt_bold}${color_green}"
+col_txt_bld_ylw="${txt_bold}${color_yellow}"
 
-## Options
-declare -r txt_regul="${colors_init}0"
-declare -r txt_bold="${colors_init}1"
+### Agregar colores a el comando 'man'
+function man() {
+	/usr/bin/env \
+	LESS_TERMCAP_mb=$(echo -e "${col_txt_bld_red}") \
+	LESS_TERMCAP_md=$(echo -e "${col_txt_bld_red}") \
+	LESS_TERMCAP_me=$(echo -e "${colors_end}") \
+	LESS_TERMCAP_se=$(echo -e "${colors_end}") \
+	LESS_TERMCAP_so=$(echo -e "${col_txt_bld_ylw}") \
+	LESS_TERMCAP_ue=$(echo -e "${colors_end}") \
+	LESS_TERMCAP_us=$(echo -e "${col_txt_bld_grn}") \
+	man "$@"
+}
 
-## Base colors
-declare -r color_red=";31m"
-declare -r color_green=";32m"
-declare -r color_yellow=";33m"
+### Colorear 'gcc' warnings & errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-declare -r colors_end="${txt_regul}m" # RESET-END COLORS
+## Rutas
+main_user="marcvs"
+export PATH="/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/snap/bin:/usr/games:/usr/local/games:/usr/share/games:/usr/sandbox:/opt/bin:/root/.local/bin:/home/$main_user/.local/bin"
 
-## Bold text colors
-declare -r col_txt_bld_red="${txt_regul}${color_red}"
-declare -r col_txt_bld_grn="${txt_bold}${color_green}"
-declare -r col_txt_bld_ylw="${txt_bold}${color_yellow}"
+export WEBXML='--stylesheet "https://raw.githubusercontent.com/honze-net/nmap-bootstrap-xsl/master/nmap-bootstrap.xsl"'
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+### FZF
+FZF_PATH="/home/$main_user/.fzf/bin"
+if [ -d "$FZF_PATH" ]; then
+	export PATH="$FZF_PATH:$PATH"
+	[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fi
+
+### fnm
+FNM_PATH="/home/$main_user/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+	export PATH="$FNM_PATH:$PATH"
+	eval "`fnm env`"
+fi
+
+# Prompt
+WORDCHARS=${WORDCHARS//\/}
+
+## Tema
+### PowerLevel10K
+#Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+#Initialization code that may require console input (password prompts, [y/n]
+#confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+#To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+### Starship
 #eval "$(starship init zsh)"
 
-# for setting history length see HISTSIZE and HISTFILESIZE
-HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=2000
+## Colores del zsh
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+ZSH_HIGHLIGHT_STYLES[default]='none'
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,underline'
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[global-alias]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[autodirectory]='fg=green,underline'
+ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[path_pathseparator]=
+ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]=
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[command-substitution]='none'
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]='fg=magenta,bold'
+ZSH_HIGHLIGHT_STYLES[process-substitution]='none'
+ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]='fg=magenta,bold'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='none'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]='fg=yellow,bold'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[rc-quote]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=magenta,bold'
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=magenta,bold'
+ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]='fg=magenta,bold'
+ZSH_HIGHLIGHT_STYLES[assign]='fg=yellow,bold'
+ZSH_HIGHLIGHT_STYLES[redirection]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[comment]='fg=black,bold'
+ZSH_HIGHLIGHT_STYLES[named-fd]='none'
+ZSH_HIGHLIGHT_STYLES[numeric-fd]='none'
+ZSH_HIGHLIGHT_STYLES[arg0]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=red,bold'
+ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[bracket-level-5]='fg=magenta,bold'
+ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='standout'
 
-# Resolve burpsuite problems
-export _JAVA_AWT_WM_NONREPARENTING=1
+## Funciones avanzadas de zsh
+autoload -Uz compinit
+compinit -d ~/.cache/zcompdump
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' rehash true
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 
-# Custom path for the user
-export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/snap/bin:/usr/games:/usr/local/games:/usr/share/games:/usr/sandbox:/root/.local/bin:/opt/bin:/home/marcvs/.fzf/bin
+## Plugins
+path_plugins='/usr/share' # Change this if the path is different
 
-# Change cursor shape for different vi modes.
-function zle-keymap-select() {
-	if [[ $KEYMAP == vicmd ]] || [[ $1 = 'block' ]]; then
-		echo -ne '\e[1 q'
-	elif [[ $KEYMAP == main ]] || [[ $KEYMAP == viins ]] || [[ $KEYMAP = '' ]] || [[ $1 = 'beam' ]]; then
-		echo -ne '\e[5 q'
-	fi
-}
-zle -N zle-keymap-select
+### Sugerencias de comandos
+auto_sugg="$path_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [[ -f $auto_sugg ]]; then
+	source $auto_sugg
+fi
 
-# Start with beam shape cursor on zsh startup and after every command.
-function zle-line-init() {
-	zle-keymap-select 'beam'
-}
+### Activar sugerencias de instalacion de comandos 'command-not-found'
+if [ -f /etc/zsh_command_not_found ]; then
+    . /etc/zsh_command_not_found
+fi
 
-# Bindkeys for some shortcuts
-bindkey "^[[H" beginning-of-line #inicio
-bindkey "^[[F" end-of-line #fin
-bindkey "^[[3~" delete-char #delete
-bindkey "^[[1;3C" forward-word #alt + ->
-bindkey "^[[1;3D" backward-word #alt + <-
-bindkey '^[[1;5C' forward-word #ctrl + ->
-bindkey '^[[1;5D' backward-word #ctrl + <-
-bindkey '^[[3;5~' kill-word #ctrl + Supr
+### Activar Syntax highlight para comandos
+syntax_high="$path_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ -f $syntax_high ]]; then
+	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=gray'
+	source $syntax_high
+fi
 
-# Custom alias
+### Agregar 'sudo' al principio con presionar dos veces 'Esc'
+sudo_plug='/opt/zsh-sudo/sudo.plugin.zsh'
+if [[ -f $sudo_plug ]]; then
+	source $sudo_plug
+fi
+
+### Alias de git predefinidos
+git_plug='/opt/zsh-git/git.plugin.zsh'
+if [[ -f $git_plug ]]; then
+	source $git_plug
+fi
+
+# Alias
+## Customizados
 alias vi='/usr/bin/nvim'
 alias vim='/usr/bin/nvim'
 
@@ -100,13 +199,10 @@ fi
 alias zshconfig="/usr/bin/nvim ~/.zshrc"
 alias cp="/bin/cp -i"
 alias mv="/bin/mv -i"
-alias rm="/bin/rm -i"
+alias rm="/bin/rm -I"
+alias history="history 0"
 
-# Set colors
-## Colored 'gcc' warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-## Set colors to some commands
+## Agregar colores a algunos comandos
 alias dir='/usr/bin/dir --color=auto'
 alias vdir='/usr/bin/vdir --color=auto'
 alias grep='/usr/bin/grep --color=auto'
@@ -115,66 +211,48 @@ alias egrep='/usr/bin/egrep --color=auto'
 alias diff='/usr/bin/diff --color=auto'
 alias ip='/usr/bin/ip --color=auto'
 
-## Set 'man' colors
-function man() {
-	/usr/bin/env \
-	LESS_TERMCAP_mb=$(echo -e "${col_txt_bld_red}") \
-	LESS_TERMCAP_md=$(echo -e "${col_txt_bld_red}") \
-	LESS_TERMCAP_me=$(echo -e "${colors_end}") \
-	LESS_TERMCAP_se=$(echo -e "${colors_end}") \
-	LESS_TERMCAP_so=$(echo -e "${col_txt_bld_ylw}") \
-	LESS_TERMCAP_ue=$(echo -e "${colors_end}") \
-	LESS_TERMCAP_us=$(echo -e "${col_txt_bld_grn}") \
-	man "$@"
+# Configuraciones
+## Change cursor shape for different vi modes.
+function zle-keymap-select() {
+	if [[ $KEYMAP == vicmd ]] || [[ $1 = 'block' ]]; then
+		echo -ne '\e[1 q'
+	elif [[ $KEYMAP == main ]] || [[ $KEYMAP == viins ]] || [[ $KEYMAP = '' ]] || [[ $1 = 'beam' ]]; then
+		echo -ne '\e[5 q'
+	fi
+}
+zle -N zle-keymap-select
+
+## Start with beam shape cursor on zsh startup and after every command.
+function zle-line-init() {
+	zle-keymap-select 'beam'
 }
 
-## Syntax colors for zsh options and arguments
-typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=magenta'
-ZSH_HIGHLIGHT_STYLES[precommand]='fg=green,bold'
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
-ZSH_HIGHLIGHT_STYLES[redirection]='fg=cyan,bold'
-ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=cyan,bold'
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[path]='fg=magenta,bold'
+## for setting history length see HISTSIZE and HISTFILESIZE
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=2000
 
-# Plugins
-declare -r path_plugins='/usr/share' # Change this if the path is different
+## Resolve burpsuite problems
+export _JAVA_AWT_WM_NONREPARENTING=1
 
-## Suggestion commands
-declare -r auto_sugg="$path_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-if [[ -f $auto_sugg ]]; then
-	source $auto_sugg
-fi
+# Bindkeys for some shortcuts
+bindkey "^[[H" beginning-of-line	# inicio
+bindkey "^[[F" end-of-line			# fin
+bindkey "^[[3~" delete-char			# delete
+bindkey "^[[1;3C" forward-word		# alt + ->
+bindkey "^[[1;3D" backward-word		# alt + <-
+bindkey '^[[1;5C' forward-word		# ctrl + ->
+bindkey '^[[1;5D' backward-word		# ctrl + <-
+bindkey '^[[3;5~' kill-word			# ctrl + Supr
+bindkey '^U' backward-kill-line		# ctrl + U
 
-## Syntax highlight for commands
-declare -r syntax_high="$path_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-if [[ -f $syntax_high ]]; then
-	source $syntax_high
-fi
-
-## Sudo with 2*Esc
-declare -r sudo_plug='/opt/zsh-sudo/sudo.plugin.zsh'
-if [[ -f $sudo_plug ]]; then
-	source $sudo_plug
-fi
-
-## Git commands aliases
-declare -r git_plug='/opt/zsh-git/git.plugin.zsh'
-if [[ -f $git_plug ]]; then
-	autoload -Uz compinit && compinit
-	source $git_plug
-fi
-
-# Custom functions
-## Create directories for pentesting
+# Funciones custom
+## Crear directorios para pentest/CTFs
 function mkt() {
 	/usr/bin/mkdir {scans,content,exploits}
 }
 
-## Extract ports from nmap -oG file
+## Extaer puertos abiertos de archivo generado con 'nmap -oG'
 function extract_ports() {
 	local file_name=$1
 	local ports="$(/usr/bin/cat $file_name | /usr/bin/grep -oP '\d{1,5}/open/[t,c,p,u,d]' | /usr/bin/awk '{print $1}' FS='/' | /usr/bin/xargs | /usr/bin/tr ' ' ',')"
@@ -196,20 +274,20 @@ function extract_ports() {
 	/usr/bin/rm extractPorts.tmp
 }
 
-## Set targget host
+## Colocar el 'target' en la polybar
 function set_target() {
 	local host=$1
 	local name=$2
 	echo "$host $name" > /opt/help/target
 }
 
-## Delete files extremly hard
+## Eliminar archivos con técnicas anti recuperación
 function rmk() {
 	/usr/bin/scrub -p dod $1
 	/usr/bin/shred -zun 10 -v $1
 }
 
-## PS Credential format
+## Formato de 'PS Credential' de Windows
 function ps_credential() {
 	if command -v bat >/dev/null 2>&1; then
 		/usr/bin/bat -l powershell --paging=never /opt/help/pscredential
@@ -220,7 +298,7 @@ function ps_credential() {
 	fi
 }
 
-## Persistence on windows
+## Comandos para persistencia en Windows
 function persistence() {
 	if command -v bat >/dev/null 2>&1; then
 		/usr/bin/bat -l powershell --paging=never /opt/help/persistence
@@ -231,7 +309,7 @@ function persistence() {
 	fi
 }
 
-## Create Digital Certificate
+## Comandos para crear certificados digitales
 function create_cert() {
 	if command -v bat >/dev/null 2>&1; then
 		/usr/bin/bat -l powershell --paging=never /opt/help/createcert
@@ -242,12 +320,12 @@ function create_cert() {
 	fi
 }
 
-## Scan near Wi-Fi signals
+## Escanear redes Wi-Fi cercanas
 function wifi_scan() {
 	/usr/bin/nmcli dev wifi list
 }
 
-## Connect to a Wi-Fi with password and without password
+## Connectars a Wi-Fi con y sin contraseña
 function wifi_connect() {
 	if [ $2 ]; then
 		/usr/bin/nmcli dev wifi connect $1 password $2
@@ -255,9 +333,3 @@ function wifi_connect() {
 		/usr/bin/nmcli dev wifi connect $1
 	fi
 }
-
-# Stylesheet XML Bootstrap short way
-export WEBXML='--stylesheet "https://raw.githubusercontent.com/honze-net/nmap-bootstrap-xsl/master/nmap-bootstrap.xsl"'
-
-# FZF configuration
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
