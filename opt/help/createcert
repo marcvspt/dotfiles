@@ -1,4 +1,4 @@
 openssl genrsa -out privateKey.key 2048 #Crear una clave privada
 openssl req -new -key privateKey.key -out signingReq.csr #Crear un Certificate Signing Request - CSR File
-openssl x509 -req -in signingReq.csr -CA publicCertCA.cert -CAkey privateCertKey.key -CAcreateserial -out certKey.pem -days 365 -sha256 #Crear un archivo PEM con el certificado publico y su llave privada
-openssl pkcs12 -export -out newCertificate.pfx -inkey privateKey.key -in certKey.pem -certfile publicCertCA.cert #Crear certificado digital pfx
+openssl x509 -req -in signingReq.csr -CA publicCertCA.crt -CAkey privateCertKey.key -CAcreateserial -out certKey.pem -days 365 -sha256 #Crear un archivo PEM con el certificado publico y su llave privada
+openssl pkcs12 -export -out newCertificate.pfx -inkey privateKey.key -in certKey.pem -certfile publicCertCA.crt #Crear certificado digital pfx
