@@ -301,9 +301,9 @@ function ps_credential() {
 ## Comandos para persistencia en Windows
 function persistence() {
 	if command -v bat >/dev/null 2>&1; then
-		/usr/bin/bat -l powershell --paging=never /opt/help/persistence
+		/usr/bin/bat -l cmd --paging=never /opt/help/persistence
 	elif command -v batcat >/dev/null 2>&1; then
-		/usr/bin/batcat -l powershell --paging=never /opt/help/persistence
+		/usr/bin/batcat -l cmd --paging=never /opt/help/persistence
 	else
 		/usr/bin/cat /opt/help/persistence
 	fi
@@ -312,9 +312,9 @@ function persistence() {
 ## Comandos para crear certificados digitales
 function create_cert() {
 	if command -v bat >/dev/null 2>&1; then
-		/usr/bin/bat -l powershell --paging=never /opt/help/createcert
+		/usr/bin/bat -l bash --paging=never /opt/help/createcert
 	elif command -v batcat >/dev/null 2>&1; then
-		/usr/bin/batcat -l powershell --paging=never /opt/help/createcert
+		/usr/bin/batcat -l bash --paging=never /opt/help/createcert
 	else
 		/usr/bin/cat /opt/help/createcert
 	fi
