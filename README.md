@@ -205,6 +205,7 @@ Haremos links simbólicos a estos archivos para root, de esta forma no necesitar
 ```bash
 user=$(whoami)
 sudo mkdir -p /root/.local/share/ 2>/dev/null
+sudo mkdir -p /root/.local/state/ 2>/dev/null
 
 sudo ln -s -f /home/$user/.bashrc /root/.bashrc
 sudo ln -s -f /home/$user/.zshrc /root/.zshrc
@@ -216,6 +217,7 @@ sudo ln -s -f /home/$user/.config/htop/ /root/.config/
 sudo ln -s -f /home/$user/.config/starship.toml /root/.config/starship.toml
 sudo ln -s -f /home/$user/.config/nvim /root/.config/
 sudo ln -s -f /home/$user/.local/share/nvim /root/.local/share/
+sudo ln -s -f /home/$user/.local/state/nvim /root/.local/state/
 sudo ln -s -f /home/$user/powerlevel10k /root/
 sudo ln -s -f /home/$user/.fzf /root/
 sudo ln -s -f /home/$user/.fzf.zsh /root/
