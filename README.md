@@ -95,25 +95,9 @@ Si existen errores o no funciona la **Polybar** consultar la sección [Polybar](
 
 ### Instalación por repositorios
 
-En el caso de `librewolf` seguir mi tutorial de mi [página web](https://marcvspt.github.io/posts/instalar-librewolf-parrot-derivados-debian/):
+En el caso de `librewolf` en la documentación oficial se explica como instalarlo en Debian: [Installation instructions for Debian based - Main Debian Repository](https://librewolf.net/installation/debian/#main-debian-repository):
 
-```bash
-sudo apt update -y && sudo apt install -y wget gnupg lsb-release apt-transport-https ca-certificates
-
-wget -O- https://deb.librewolf.net/keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/librewolf.gpg
-
-sudo tee /etc/apt/sources.list.d/librewolf.sources << EOF > /dev/null
-Types: deb
-URIs: https://deb.librewolf.net
-Suites: bullseye
-Components: main
-Architectures: amd64
-Signed-By: /usr/share/keyrings/librewolf.gpg
-EOF
-
-sudo apt update -y
-sudo apt install -y librewolf
-```
+Para `brave` podemos encontrar en la documentación oficial como se instala [Release Channel Installation - Debian, Ubuntu, Mint](https://brave.com/linux/#debian-ubuntu-mint)
 
 En el caso de `visual studio code`, podemos usar el **.deb** directamente para instalarlo y automaticamente se instalará el repositorio para futuras actualizaciones:
 
@@ -127,33 +111,6 @@ rm -f packages.microsoft.gpg
 
 sudo apt update -y
 sudo apt install -y code
-```
-
-Instalar `microsoft edge`:
-
-```bash
-sudo apt update -y
-
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge.list'
-sudo rm microsoft.gpg
-
-sudo apt update -y
-sudo apt install -y microsoft-edge-stable
-```
-
-Instalar `spotify`:
-
-```bash
-sudo apt update -y
-sudo apt install -y dirmngr
-
-curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
-echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-
-sudo apt update -y
-sudo apt install -y spotify-client
 ```
 
 ### Fuentes
