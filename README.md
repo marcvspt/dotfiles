@@ -45,7 +45,7 @@ Entorno de trabajo
 
 ```bash
 sudo update -y
-sudo apt install -y alsa-utils betterlockscreen brightnessctl bspwm cbatticon command-not-found feh flameshot imagemagick pavucontrol polybar rofi sxhkd volumeicon-alsa zsh zsh-autosuggestions zsh-syntax-highlighting
+sudo apt install -y alsa-utils betterlockscreen brightnessctl bspwm cbatticon command-not-found feh flameshot imagemagick kitty pavucontrol polybar rofi sxhkd volumeicon-alsa zsh zsh-autosuggestions zsh-syntax-highlighting
 ```
 
 Ya instaladas pero utiles
@@ -168,6 +168,8 @@ Se necesita también la siguiente fuente para emojis:
 
 - [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
 
+Se deben incluir en la ruta `/usr/local/share/fonts`
+
 ## Configuraciones
 
 Copiar archivos de configuraciones:
@@ -188,6 +190,7 @@ cp -r ./config/bspwm /home/$user/.config/bspwm
 cp -r ./config/sxhkd /home/$user/.config/sxhkd
 cp -r ./config/picom /home/$user/.config/picom
 cp -r ./config/polybar /home/$user/.config/polybar
+cp -r ./config/kitty /home/$user/.config/kitty
 cp -r ./config/starship.toml /home/$user/.config/starship.toml
 cp -r ./opt/* /opt/
 ```
@@ -213,6 +216,7 @@ sudo ln -s -f /home/$user/.p10k.zsh /root/.p10k.zsh
 sudo ln -s -f /home/$user/.nanorc /root/.nanorc
 sudo ln -s -f /home/$user/.vimrc /root/.vimrc
 sudo ln -s -f /home/$user/.Xdefaults /root/.Xdefaults
+sudo ln -s -f /home/$user/.config/kitty/ /root/.config/
 sudo ln -s -f /home/$user/.config/htop/ /root/.config/
 sudo ln -s -f /home/$user/.config/starship.toml /root/.config/starship.toml
 sudo ln -s -f /home/$user/.config/nvim /root/.config/
@@ -228,10 +232,10 @@ Configurar el background del escritorio y de la pantalla de bloqueo:
 
 ```bash
 user=$(whoami)
-mkdir -p /home/$user/Imágenes
+mkdir -p /home/$user/Pictures
 
-git clone https://github.com/marcvspt/Wallpapers.git ~/Imágenes/Wallpapers
-betterlockscreen -u /home/$user/Imágenes/Wallpapers/24.jpg # Elige el que más te guste
+git clone https://github.com/marcvspt/Wallpapers.git ~/Pictures/Wallpapers
+betterlockscreen -u /home/$user/Pictures/Wallpapers/24.jpg # Elige el que más te guste
 ```
 
 ## Opcional
