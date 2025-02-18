@@ -8,7 +8,7 @@ declare -r color_purple="%{F#d764ff}"
 declare -r symbol_vpn="${color_purple}󰅟 "
 
 # Interaces
-declare -r iface_vpn="$(/usr/bin/ifconfig tun0 2>/dev/null | /usr/bin/grep 'inet ' | /usr/bin/awk '{print $2}')"
+declare -r iface_vpn="$(/usr/sbin/ifconfig tun0 2>/dev/null | /usr/bin/grep 'inet ' | /usr/bin/awk '{print $2}')"
 
 
 if [[ $iface_vpn ]]; then
