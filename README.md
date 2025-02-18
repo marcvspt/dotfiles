@@ -1,18 +1,8 @@
 # Configuración general
 
-## Creditos
-
-Este entorno está inspirado en el de **s4vitar** y está hecho especificamente para **Kali Linux**, sin embargo, se mezclan configuraciones de sus 2 últimos vídeos de configuración de entornos para linux en YT:
-
-- [Entorno Parrot de s4vitar](https://www.youtube.com/watch?v=mHLwfI1nHHY).
-- [Entorno Arch de s4vitar](https://www.youtube.com/watch?v=fshLf6u8B-w).
-
-Así com los temas de la polybar de [adi1090x](https://github.com/adi1090x/polybar-themes). Y nuevas cosas hechas por mí.
-
-![entorno bspwm-sxhkd + picom + polybar](demo.png)
+Herramientas y configuraciones de terminal para un entorno personalizado de **Kali Linux**.
 
 - [Configuración general](#configuración-general)
-  - [Creditos](#creditos)
   - [Instalaciones](#instalaciones)
     - [Software del sistema](#software-del-sistema)
     - [Software que no estan en APT](#software-que-no-estan-en-apt)
@@ -20,13 +10,11 @@ Así com los temas de la polybar de [adi1090x](https://github.com/adi1090x/polyb
     - [Fuentes](#fuentes)
   - [Configuraciones](#configuraciones)
   - [Opcional](#opcional)
-    - [Atajos de aplicaciones](#atajos-de-aplicaciones)
     - [TLD o dominio raíz personalizado en navegador web](#tld-o-dominio-raíz-personalizado-en-navegador-web)
-    - [Doble monitor](#doble-monitor)
     - [Cambiar prompt](#cambiar-prompt)
-    - [Configurar lightdm](#configurar-lightdm)
     - [Nevagador por default](#nevagador-por-default)
   - [Errores y soluciones](#errores-y-soluciones)
+  - [Creditos](#creditos)
 
 Para un entorno más básico consultar la información [Extras](Extras.md).
 
@@ -45,7 +33,7 @@ Entorno de trabajo
 
 ```bash
 sudo update -y
-sudo apt install -y alsa-utils betterlockscreen brightnessctl bspwm cbatticon command-not-found feh flameshot imagemagick kitty pavucontrol polybar rofi sxhkd volumeicon-alsa zsh zsh-autosuggestions zsh-syntax-highlighting
+sudo apt install -y alsa-utils command-not-found flameshot imagemagick kitty zsh zsh-autosuggestions zsh-syntax-highlighting
 ```
 
 Ya instaladas pero utiles
@@ -76,42 +64,13 @@ Instalación manual
 - [python2-pip](Extras.md#descargar-pip2)
 - [neovim (latest)](https://github.com/neovim/neovim-releases/releases)
 
-Instalar picom (mejor opción que con APT)
-
-```bash
-sudo apt update -y
-sudo apt install -y meson libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev libxcb-glx0-dev libpcre3-dev libev4
-
-cd ~/Templates
-git clone https://github.com/ibhagwan/picom.git
-cd picom/
-git submodule update --init --recursive
-meson --buildtype=release . build
-ninja -C build
-sudo ninja -C build install
-```
-
-Si existen errores o no funciona la **Polybar** consultar la sección [Polybar](Errores.md#polybar) de los errores.
-
 ### Instalación por repositorios
 
 En el caso de `librewolf` en la documentación oficial se explica como instalarlo en Debian: [Installation instructions for Debian based - Main Debian Repository](https://librewolf.net/installation/debian/#main-debian-repository):
 
 Para `brave` podemos encontrar en la documentación oficial como se instala [Release Channel Installation - Debian, Ubuntu, Mint](https://brave.com/linux/#debian-ubuntu-mint)
 
-En el caso de `visual studio code`, podemos usar el **.deb** directamente para instalarlo y automaticamente se instalará el repositorio para futuras actualizaciones:
-
-```bash
-sudo apt install -y wget gpg
-
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-rm -f packages.microsoft.gpg
-
-sudo apt update -y
-sudo apt install -y code
-```
+En el caso de `visual studio code`, podemos usar el **.deb** directamente para instalarlo y automaticamente se instalará el repositorio para futuras actualizaciones o incluimos desde 0 los repositorios de acuerdo a la documentación: [VSCode Debian and Ubuntu based distributions](https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions)
 
 ### Fuentes
 
@@ -125,7 +84,7 @@ Se necesita también la siguiente fuente para emojis:
 
 - [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
 
-Se deben incluir en la ruta `/usr/local/share/fonts`
+Se deben incluir en la ruta `/usr/local/share/fonts` y ejecutar `sudo fc-cache -v`
 
 ## Configuraciones
 
@@ -143,10 +102,6 @@ cp ./home/nanorc ~/.nanorc
 cp ./home/vimrc ~/.vimrc
 cp ./home/Xdefaults ~/.Xdefaults
 cp -r ./config/htop /home/$user/.config/htop
-cp -r ./config/bspwm /home/$user/.config/bspwm
-cp -r ./config/sxhkd /home/$user/.config/sxhkd
-cp -r ./config/picom /home/$user/.config/picom
-cp -r ./config/polybar /home/$user/.config/polybar
 cp -r ./config/kitty /home/$user/.config/kitty
 cp -r ./config/starship.toml /home/$user/.config/starship.toml
 cp -r ./opt/* /opt/
@@ -154,9 +109,12 @@ cp -r ./opt/* /opt/
 
 Configuraciones apartir de repositorios:
 
-- [**powerlevel10k**](https://github.com/romkatv/powerlevel10k#manual).
+- [**Powerlevel10k**](https://github.com/romkatv/powerlevel10k#manual)
 - [**fzf**](https://github.com/junegunn/fzf#using-git)
 - [**NvChad**](https://nvchad.com/docs/quickstart/install)
+
+Los plugins de `zsh` deben ir en `/opt/zsh-sudo/`:
+
 - [**ZSH sudo plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh)
 - [**ZSH git plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh)
 
@@ -185,21 +143,9 @@ sudo ln -s -f /home/$user/.fzf.zsh /root/
 sudo ln -s -f /home/$user/.fzf.bash /root/
 ```
 
-Configurar el background del escritorio y de la pantalla de bloqueo:
-
-```bash
-user=$(whoami)
-mkdir -p /home/$user/Pictures
-
-git clone https://github.com/marcvspt/Wallpapers.git ~/Pictures/Wallpapers
-betterlockscreen -u /home/$user/Pictures/Wallpapers/24.jpg # Elige el que más te guste
-```
+Algunos Wallpapers bonitos los tengo en un repositorio propio: [Wallpapers marcvspt (No son propios)](https://github.com/marcvspt/Wallpapers.git)
 
 ## Opcional
-
-### Atajos de aplicaciones
-
-Se pueden modificar los atajos de teclado del entorno en el archivo [sxhkdrc](config/sxhkd/sxhkdrc). Es importante probar la configuración y al recargar el entorno ejecutar `Super + Esc`.
 
 ### TLD o dominio raíz personalizado en navegador web
 
@@ -214,22 +160,6 @@ browser.fixup.domainsuffixwhitelist.htb
 `.htb` es el dominio raíz como `.com`, `.io`, `.org`, etc., ahora podemos poner `searcher.htb`, `lolipop.htb`, etc., y nos dirigirá al dominio personalizado.
 
 ![TLD o dominio raíz personalizado en navegador web](tld-htb-librewolf.png)
-
-### Doble monitor
-
-Este repositorio ya tiene un script y configuraciones para que **BSPWM** funcione con doble monitor extendido a la derecha. Necesitamos descomentar el bloque if del archivo [bspwmrc](config/bspwm/bspwmrc):
-
-```bash
-my_laptop_external_monitor=$(xrandr --query | grep 'HDMI-1')
-if [[ $my_laptop_external_monitor != *disconnected* ]]; then
-  bspc monitor eDP-1 -d I II III IV V
-  bspc monitor HDMI-1 -d VI VII VIII IX X
-else
-  bspc monitor -d I II III IV V VI VII VIII IX X
-fi
-```
-
-Guardamos cambios y ejecutamos las teclas `Super + Shift + R` y `Super + Esc`. Si existen errores o no funciona consultar la sección de [Bspwm doble monitor](Errores.md#bspwm-doble-monitor) de los errores.
 
 ### Cambiar prompt
 
@@ -254,12 +184,6 @@ Podemos cambiar el prompt para colorearlo al estilo **Arch**, **Fedora** y **Gen
 eval "$(starship init bash)"
 ```
 
-### Configurar lightdm
-
-```bash
-cp ./etc/lightdm* /etc/lightdm/
-```
-
 ### Nevagador por default
 
 Para establecer el navegador web por default hacemos lo siguiente:
@@ -282,3 +206,10 @@ Buscar el binario en las rutas `bin` como:
 ## Errores y soluciones
 
 [Errores.md](Errores.md)
+
+## Creditos
+
+Este entorno está inspirado en el de **s4vitar**, mezclando algunas configuraciones y herramientas de sus 2 últimos vídeos de configuración de entornos para linux en YT:
+
+- [Entorno Parrot de s4vitar](https://www.youtube.com/watch?v=mHLwfI1nHHY).
+- [Entorno Arch de s4vitar](https://www.youtube.com/watch?v=fshLf6u8B-w).
