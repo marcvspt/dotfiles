@@ -26,14 +26,14 @@ No instalados en Kali por defecto
 
 ```bash
 sudo update -y
-sudo apt install -y bat cmake dnsutils docker-compose docker.io gettext gettext-doc gettext-el gobuster htop html2text httpie jq lsd moreutils ncat p7zip p7zip-full p7zip-rar ranger rlwrap suckless-tools tor torbrowser-launcher xclip xterm
+sudo apt install -y bat cmake dnsutils docker-compose docker.io gettext gettext-doc gettext-el gobuster htop html2text httpie jq lsd moreutils ncat p7zip p7zip-full ranger rlwrap suckless-tools tor torbrowser-launcher xclip xterm
 ```
 
 Entorno de trabajo
 
 ```bash
 sudo update -y
-sudo apt install -y alsa-utils command-not-found flameshot imagemagick kitty zsh zsh-autosuggestions zsh-syntax-highlighting
+sudo apt install -y alsa-utils command-not-found flameshot imagemagick kitty fzf starship zsh zsh-autosuggestions zsh-syntax-highlighting
 ```
 
 Ya instaladas pero utiles
@@ -60,7 +60,6 @@ sudo apt install -y libreoffice libreoffice-l10n-es libreoffice-help-es
 
 Instalación manual
 
-- [starship](https://starship.rs/es-ES/guide/#%F0%9F%9A%80-instalacion)
 - [python2-pip](Extras.md#descargar-pip2)
 - [neovim (latest)](https://github.com/neovim/neovim-releases/releases)
 
@@ -101,8 +100,8 @@ cp ./home/p10k.zsh ~/.p10k.zsh
 cp ./home/nanorc ~/.nanorc
 cp ./home/vimrc ~/.vimrc
 cp ./home/Xdefaults ~/.Xdefaults
-cp -r ./config/htop /home/$user/.config/htop
-cp -r ./config/kitty /home/$user/.config/kitty
+rm -rf /home/$USER/.config/htop && cp -r ./config/htop /home/$user/.config/
+rm -rf /home/$USER/.config/kitty && cp -r ./config/kitty /home/$user/.config/
 cp -r ./config/starship.toml /home/$user/.config/starship.toml
 cp -r ./opt/* /opt/
 ```
@@ -110,13 +109,12 @@ cp -r ./opt/* /opt/
 Configuraciones apartir de repositorios:
 
 - [**Powerlevel10k**](https://github.com/romkatv/powerlevel10k#manual)
-- [**fzf**](https://github.com/junegunn/fzf#using-git)
 - [**NvChad**](https://nvchad.com/docs/quickstart/install)
 
-Los plugins de `zsh` deben ir en `/opt/zsh-sudo/`:
+Plugins de `zsh`:
 
-- [**ZSH sudo plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh)
-- [**ZSH git plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh)
+- [**ZSH sudo plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh) debe ir en `/opt/zsh-sudo/`
+- [**ZSH git plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh) debe ir en `/opt/zsh-git/`
 
 Haremos links simbólicos a estos archivos para root, de esta forma no necesitaremos instalar de nuevo estas herramientas, temas y configuraciones para root:
 
@@ -124,6 +122,7 @@ Haremos links simbólicos a estos archivos para root, de esta forma no necesitar
 user=$(whoami)
 sudo mkdir -p /root/.local/share/ 2>/dev/null
 sudo mkdir -p /root/.local/state/ 2>/dev/null
+sudo mkdir -p /root/.conf/
 
 sudo ln -s -f /home/$user/.bashrc /root/.bashrc
 sudo ln -s -f /home/$user/.zshrc /root/.zshrc
