@@ -39,6 +39,10 @@ FZF_PATH="/home/$main_user/.fzf/bin"
 if [ -d "$FZF_PATH" ]; then
 	export PATH="$FZF_PATH:$PATH"
 	[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+elif command -v fzf &> /dev/null; then
+	source <(fzf --zsh)
+else
+    : # Nada
 fi
 
 ### fnm
@@ -46,6 +50,8 @@ FNM_PATH="/home/$main_user/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
 	export PATH="$FNM_PATH:$PATH"
 	eval "`fnm env`"
+else
+    : # Nada
 fi
 
 # Prompt
@@ -66,7 +72,7 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ### Starship
-#eval "$(starship init zsh)"
+#eval "$(/usr/bin/starship init zsh)"
 
 ## Colores del zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
