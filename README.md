@@ -26,7 +26,7 @@ No instalados en Kali por defecto
 
 ```bash
 sudo update -y
-sudo apt install -y bat cmake dnsutils docker-compose docker.io gettext gettext-doc gettext-el gobuster htop html2text httpie jq lsd moreutils ncat p7zip p7zip-full ranger rlwrap suckless-tools tor torbrowser-launcher xclip xterm
+sudo apt install -y bat cmake dnsutils docker-compose docker.io gettext gettext-doc gettext-el gobuster htop html2text httpie jq lsd moreutils neovim ncat p7zip p7zip-full ranger rlwrap suckless-tools tor torbrowser-launcher xclip xterm
 ```
 
 Entorno de trabajo
@@ -61,7 +61,6 @@ sudo apt install -y libreoffice libreoffice-l10n-es libreoffice-help-es
 Instalación manual
 
 - [python2-pip](Extras.md#descargar-pip2)
-- [neovim (latest)](https://github.com/neovim/neovim-releases/releases)
 
 ### Instalación por repositorios
 
