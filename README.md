@@ -100,8 +100,8 @@ cp ./home/p10k.zsh ~/.p10k.zsh
 cp ./home/nanorc ~/.nanorc
 cp ./home/vimrc ~/.vimrc
 cp ./home/Xdefaults ~/.Xdefaults
-rm -rf /home/$USER/.config/htop && cp -r ./config/htop /home/$user/.config/
-rm -rf /home/$USER/.config/kitty && cp -r ./config/kitty /home/$user/.config/
+rm -rf /home/$user/.config/htop && cp -r ./config/htop /home/$user/.config/
+rm -rf /home/$user/.config/kitty && cp -r ./config/kitty /home/$user/.config/
 cp -r ./config/starship.toml /home/$user/.config/starship.toml
 cp -r ./opt/* /opt/
 ```
@@ -137,9 +137,6 @@ sudo ln -s -f /home/$user/.config/nvim /root/.config/
 sudo ln -s -f /home/$user/.local/share/nvim /root/.local/share/
 sudo ln -s -f /home/$user/.local/state/nvim /root/.local/state/
 sudo ln -s -f /home/$user/powerlevel10k /root/
-sudo ln -s -f /home/$user/.fzf /root/
-sudo ln -s -f /home/$user/.fzf.zsh /root/
-sudo ln -s -f /home/$user/.fzf.bash /root/
 ```
 
 Algunos Wallpapers bonitos los tengo en un repositorio propio: [Wallpapers marcvspt (No son propios)](https://github.com/marcvspt/Wallpapers.git)
