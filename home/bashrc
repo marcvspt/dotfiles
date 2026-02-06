@@ -188,6 +188,10 @@ FZF_PATH="/home/$main_user/.fzf/bin"
 if [ -d "$FZF_PATH" ]; then
 	export PATH="$FZF_PATH:$PATH"
 	[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+elif command -v fzf &> /dev/null; then
+	eval "$(fzf --bash)"
+else
+    : # Nada
 fi
 
 # fnm
@@ -195,4 +199,6 @@ FNM_PATH="/home/$main_user/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
 	export PATH="$FNM_PATH:$PATH"
 	eval "`fnm env`"
+else
+    : # Nada
 fi
