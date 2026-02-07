@@ -8,51 +8,54 @@ Herramientas y configuraciones de terminal para un entorno personalizado de **Ka
     - [Software que no estan en APT](#software-que-no-estan-en-apt)
     - [Instalación por repositorios](#instalación-por-repositorios)
     - [Fuentes](#fuentes)
+    - [Extensiones de nevagador](#extensiones-de-navegador)
   - [Configuraciones](#configuraciones)
   - [Opcional](#opcional)
     - [TLD o dominio raíz personalizado en navegador web](#tld-o-dominio-raíz-personalizado-en-navegador-web)
     - [Cambiar prompt](#cambiar-prompt)
-    - [Nevagador por default](#nevagador-por-default)
+    - [Herramientas por default](#herramientas-por-default)
+    - [Grupos](#grupos)
   - [Errores y soluciones](#errores-y-soluciones)
   - [Creditos](#creditos)
 
-Para un entorno más básico consultar la información [Extras](Extras.md).
+Para un entorno más básico consultar la información de [Extras](Extras.md).
 
 ## Instalaciones
 
 ### Software del sistema
 
-No instalados en Kali por defecto
+No instalados en Kali por defecto.
 
 ```bash
 sudo update -y
 sudo apt install -y bat cmake dnsutils docker-compose docker.io gettext gettext-doc gettext-el gobuster htop html2text httpie jq lsd moreutils neovim ncat p7zip p7zip-full ranger rlwrap suckless-tools tor torbrowser-launcher xclip xterm
 ```
 
-Entorno de trabajo
+Entorno de trabajo.
 
 ```bash
 sudo update -y
-sudo apt install -y alsa-utils command-not-found flameshot imagemagick kitty fzf starship zsh zsh-autosuggestions zsh-syntax-highlighting
+sudo apt install -y alsa-utils command-not-found flameshot fzf imagemagick kitty open-vm-tools open-vm-tools-desktop starship zsh zsh-autosuggestions zsh-syntax-highlighting
 ```
 
-Ya instaladas pero utiles
+Ya instaladas pero utiles.
 
 ```bash
 sudo update -y
-sudo apt install -y curl ffuf gcc gettext-base git gzip iptables macchanger make nano net-tools netdiscover netmask nmap openssl openvpn plocate proxychains python-is-python3 python2 python3 python3-pip tcpdump tree ufw unzip vim wget whatweb zip
+sudo apt install -y chromium curl ffuf gcc gettext-base git gzip iptables macchanger make nano net-tools netdiscover netmask nmap openssl openvpn plocate proxychains python-is-python3 python2 python3 python3-pip tcpdump tree ufw unzip vim wget whatweb zip
 ```
 
-Herramientas de pentest muy grandes
+Herramientas de pentest muy grandes.
 
 ```bash
 sudo update -y
 sudo apt install -y burpsuite metasploit-framework wireshark zaproxy
 ```
 
-Extras
+Extras.
 
 ```bash
+sudo update -y
 sudo apt install -y libreoffice libreoffice-l10n-es libreoffice-help-es
 ```
 
@@ -61,28 +64,39 @@ sudo apt install -y libreoffice libreoffice-l10n-es libreoffice-help-es
 Instalación manual
 
 - [python2-pip](Extras.md#descargar-pip2)
+- [bash-tools](Extras.md#bash-tools)
+- [**Powerlevel10k**](https://github.com/romkatv/powerlevel10k#manual)
+- [**NvChad**](https://nvchad.com/docs/quickstart/install)
 
 ### Instalación por repositorios
 
-En el caso de `librewolf` en la documentación oficial se explica como instalarlo en Debian: [Installation instructions for Debian based - Main Debian Repository](https://librewolf.net/installation/debian/#main-debian-repository):
+En el caso de `librewolf` en la documentación oficial se explica como instalarlo en Debian: [Installation instructions for Debian based - Main Debian Repository](https://librewolf.net/installation/debian/#main-debian-repository).
 
-Para `brave` podemos encontrar en la documentación oficial como se instala [Release Channel Installation - Debian, Ubuntu, Mint](https://brave.com/linux/#debian-ubuntu-mint)
+Para `brave` podemos encontrar en la documentación oficial como se instala [Release Channel Installation - Debian, Ubuntu, Mint](https://brave.com/linux/#debian-ubuntu-mint).
 
-En el caso de `visual studio code`, podemos usar el **.deb** directamente para instalarlo y automaticamente se instalará el repositorio para futuras actualizaciones o incluimos desde 0 los repositorios de acuerdo a la documentación: [VSCode Debian and Ubuntu based distributions](https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions)
+En el caso de `visual studio code`, podemos usar el **.deb** directamente para instalarlo y automaticamente se instalará el repositorio para futuras actualizaciones o incluimos desde 0 los repositorios de acuerdo a la documentación: [VSCode Debian and Ubuntu based distributions](https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions).
 
 ### Fuentes
 
-Se necesitan las siguientes fuentes de [nerd fonts](https://github.com/ryanoasis/nerd-fonts/releases):
+Se necesitan fuentes de [nerd fonts](https://github.com/ryanoasis/nerd-fonts/releases) para que los iconos funcionen bien, en especial uso `FiraCode` por las *font ligatures*.
 
-- FiraCode
-- FantasqueSansMono
-- Iosevka
+Se necesita también la fuente [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji) para emojis.
 
-Se necesita también la siguiente fuente para emojis:
+> Se deben incluir en la ruta `/usr/local/share/fonts` y ejecutar `sudo fc-cache -v`.
 
-- [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
+### Extensiones de navegador
 
-Se deben incluir en la ruta `/usr/local/share/fonts` y ejecutar `sudo fc-cache -v`
+- [Wappalyzer - Technology profiler](https://www.wappalyzer.com/)
+- [BuiltWith Technology Profiler](https://builtwith.com/toolbar)
+- [User-Agent Switcher and Manager](https://github.com/ray-lothian/UserAgent-Switcher/)
+- [FoxyProxy Browser Extension](https://github.com/foxyproxy/browser-extension)
+- [IP Address and Domain Information](https://dnslytics.com/)
+- [RevEye Reverse Image Search](https://squobble.com/)
+- [HackTools](https://github.com/LasCC/HackTools)
+- [Privacy Badger](https://privacybadger.org/)
+- [uBlock Origin/Lite](https://ublockorigin.com/)
+- [File Icon for GitHub, GitLab and Bitbucket](https://github.com/homerchen19/github-file-icons)
+- [Dark Reader](https://github.com/darkreader/darkreader)
 
 ## Configuraciones
 
@@ -99,29 +113,24 @@ cp ./home/p10k.zsh ~/.p10k.zsh
 cp ./home/nanorc ~/.nanorc
 cp ./home/vimrc ~/.vimrc
 cp ./home/Xdefaults ~/.Xdefaults
-rm -rf /home/$user/.config/htop && cp -r ./config/htop /home/$user/.config/
-rm -rf /home/$user/.config/kitty && cp -r ./config/kitty /home/$user/.config/
-cp -r ./config/starship.toml /home/$user/.config/starship.toml
+rm -rf /home/$user/.config/htop 2>/dev/null && cp -r ./config/htop /home/$user/.config/
+rm -rf /home/$user/.config/kitty 2>/dev/null && cp -r ./config/kitty /home/$user/.config/
+rm /home/$user/.config/starship.toml 2>/dev/null && cp ./config/starship.toml /home/$user/.config/starship.toml
 cp -r ./opt/* /opt/
 ```
-
-Configuraciones apartir de repositorios:
-
-- [**Powerlevel10k**](https://github.com/romkatv/powerlevel10k#manual)
-- [**NvChad**](https://nvchad.com/docs/quickstart/install)
 
 Plugins de `zsh`:
 
 - [**ZSH sudo plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh) debe ir en `/opt/zsh-sudo/`
 - [**ZSH git plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh) debe ir en `/opt/zsh-git/`
 
-Haremos links simbólicos a estos archivos para root, de esta forma no necesitaremos instalar de nuevo estas herramientas, temas y configuraciones para root:
+Haremos links simbólicos a estos archivos para root, de esta forma no necesitaremos instalar de nuevo estas herramientas, temas y configuraciones para root (***NO SE RECOMIENDA EN SERVIDORES PRODUCTIVOS***):
 
 ```bash
 user=$(whoami)
 sudo mkdir -p /root/.local/share/ 2>/dev/null
 sudo mkdir -p /root/.local/state/ 2>/dev/null
-sudo mkdir -p /root/.conf/
+sudo mkdir -p /root/.conf/ 2>/dev/null
 
 sudo ln -s -f /home/$user/.bashrc /root/.bashrc
 sudo ln -s -f /home/$user/.zshrc /root/.zshrc
@@ -138,9 +147,9 @@ sudo ln -s -f /home/$user/.local/state/nvim /root/.local/state/
 sudo ln -s -f /home/$user/powerlevel10k /root/
 ```
 
-Algunos Wallpapers bonitos los tengo en un repositorio propio: [Wallpapers marcvspt (No son propios)](https://github.com/marcvspt/Wallpapers.git)
-
 ## Opcional
+
+Algunos Wallpapers bonitos puden descargarlos en mi reporistorio [Wallpapers marcvspt](https://github.com/marcvspt/Wallpapers.git) (No son propios, solo los recopilé).
 
 ### TLD o dominio raíz personalizado en navegador web
 
@@ -179,7 +188,7 @@ Podemos cambiar el prompt para colorearlo al estilo **Arch**, **Fedora** y **Gen
 eval "$(starship init bash)"
 ```
 
-### Nevagador por default
+### Herramientas por default
 
 Para establecer el navegador web por default hacemos lo siguiente:
 
@@ -189,8 +198,15 @@ sudo update-alternatives --config x-www-browser
 ##### Select librewolf
 ```
 
-Buscar el binario en las rutas `bin` como:
+Para configurar el comando `vi` para que abra y ejecute `nvim` hacemos lo siguiente:
 
+```bash
+sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 100
+sudo update-alternatives --config vi
+##### Select nvim
+```
+
+Se debe buscar los binarios en las rutas `bin` del sistema como:
 - `/bin`
 - `/usr/bin`
 - `/usr/local/bin`
@@ -198,13 +214,15 @@ Buscar el binario en las rutas `bin` como:
 - `/usr/sbin`
 - `/usr/local/sbin`
 
+### Grupos
+
+Algunas herramientas comunes necesitan permisos de **root**, sin embargo, algunos grupos ya tienen esos permisos:
+
+```bash
+user=$(whoami)
+sudo usermod -aG docker,tcpdump,wireshark,www-data $user
+```
+
 ## Errores y soluciones
 
 [Errores.md](Errores.md)
-
-## Creditos
-
-Este entorno está inspirado en el de **s4vitar**, mezclando algunas configuraciones y herramientas de sus 2 últimos vídeos de configuración de entornos para linux en YT:
-
-- [Entorno Parrot de s4vitar](https://www.youtube.com/watch?v=mHLwfI1nHHY).
-- [Entorno Arch de s4vitar](https://www.youtube.com/watch?v=fshLf6u8B-w).
