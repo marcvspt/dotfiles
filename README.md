@@ -65,8 +65,8 @@ Instalación manual
 
 - [python2-pip](Extras.md#descargar-pip2)
 - [bash-tools](Extras.md#bash-tools)
-- [**Powerlevel10k**](https://github.com/romkatv/powerlevel10k#manual)
-- [**NvChad**](https://nvchad.com/docs/quickstart/install)
+- [Powerlevel10k](https://github.com/romkatv/powerlevel10k#manual)
+- [NvChad](https://nvchad.com/docs/quickstart/install)
 
 ### Instalación por repositorios
 
@@ -90,11 +90,12 @@ Se necesita también la fuente [Noto Emoji](https://fonts.google.com/noto/specim
 - [BuiltWith Technology Profiler](https://builtwith.com/toolbar)
 - [User-Agent Switcher and Manager](https://github.com/ray-lothian/UserAgent-Switcher/)
 - [FoxyProxy Browser Extension](https://github.com/foxyproxy/browser-extension)
-- [IP Address and Domain Information](https://dnslytics.com/)
+- [IP Address and Domain Information](https://dnslytics.com/browser-extensions-addons-accelerators/)
 - [RevEye Reverse Image Search](https://squobble.com/)
 - [HackTools](https://github.com/LasCC/HackTools)
 - [Privacy Badger](https://privacybadger.org/)
 - [uBlock Origin/Lite](https://ublockorigin.com/)
+- [JSON Viewer](https://github.com/pd4d10/json-viewer)
 - [File Icon for GitHub, GitLab and Bitbucket](https://github.com/homerchen19/github-file-icons)
 - [Dark Reader](https://github.com/darkreader/darkreader)
 
