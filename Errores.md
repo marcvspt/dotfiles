@@ -18,7 +18,7 @@ En versiones antiguas de `bat`, el comando es `batcat`, por lo que hay que susti
 
 ## Problemas con la hora y fecha
 
-Podemos consultar esta [gúia](https://www.cyberciti.biz/faq/howto-set-date-time-from-linux-command-prompt/) para resolverlo, pero es posible solucionar con esta linea:
+Podemos consultar esta [guia](https://www.cyberciti.biz/faq/howto-set-date-time-from-linux-command-prompt/) para resolverlo, pero es posible solucionar con esta linea:
 
 ```bash
 sudo timedatectl set-ntp true
