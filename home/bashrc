@@ -179,7 +179,8 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/snap/bin:/usr/games:/usr/local/games:/usr/share/games:/usr/sandbox:/root/.local/bin:/opt/bin
+main_user="marcvs"
+export PATH="$PATH:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/snap/bin:/usr/games:/usr/local/games:/usr/share/games:/usr/sandbox:/opt/bin:/root/.local/bin:/home/$main_user/.local/bin"
 
 alias bashrconfig="vim ~/.bashrc"
 

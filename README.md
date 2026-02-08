@@ -1,12 +1,11 @@
 # Configuración general
 
-Herramientas y configuraciones de terminal para un entorno personalizado de **Kali Linux**.
+Herramientas y configuraciones de terminal para un entorno personalizado de **Kali Linux** y/o **Debian**.
 
 - [Configuración general](#configuración-general)
   - [Instalaciones](#instalaciones)
     - [Software del sistema](#software-del-sistema)
-    - [Software que no estan en APT](#software-que-no-estan-en-apt)
-    - [Instalación por repositorios](#instalación-por-repositorios)
+    - [Software sin repositorios en APT](#software-sin-repositorios-en-apt)
     - [Fuentes](#fuentes)
     - [Extensiones de nevagador](#extensiones-de-navegador)
   - [Configuraciones](#configuraciones)
@@ -16,65 +15,85 @@ Herramientas y configuraciones de terminal para un entorno personalizado de **Ka
     - [Herramientas por default](#herramientas-por-default)
     - [Grupos](#grupos)
   - [Errores y soluciones](#errores-y-soluciones)
-  - [Creditos](#creditos)
-
-Para un entorno más básico consultar la información de [Extras](Extras.md).
 
 ## Instalaciones
 
 ### Software del sistema
 
-No instalados en Kali por defecto.
+Algunas ya están instaladas cuando se descarga e importada una máquina preconfigurada, sin embargo, instalando desde 0 con las `.iso` no siempre, dependerá de que software se seleccione en el instalador. Recuerda ejecutar antes:
+
 
 ```bash
-sudo update -y
-sudo apt install -y bat cmake dnsutils docker-compose docker.io gettext gettext-doc gettext-el gobuster htop html2text httpie jq lsd moreutils neovim ncat p7zip p7zip-full ranger rlwrap suckless-tools tor torbrowser-launcher xclip xterm
+sudo apt update -y
+sudo apt full-upgrade -y
 ```
 
-Entorno de trabajo.
+#### Kali
+
 
 ```bash
-sudo update -y
-sudo apt install -y alsa-utils command-not-found flameshot fzf imagemagick kitty open-vm-tools open-vm-tools-desktop starship zsh zsh-autosuggestions zsh-syntax-highlighting
+sudo apt install -y alsa-utils bat chromium cmake command-not-found curl dnsutils docker-compose docker.io ffuf flameshot fzf gcc gettext gettext-base gettext-doc gettext-el git gobuster gzip html2text htop httpie imagemagick iptables jq kitty lsd macchanger make moreutils nano ncat neovim netdiscover netmask net-tools nmap openssl openvpn p7zip p7zip-full plocate proxychains python2 python3 python3-pip python-is-python3 ranger rlwrap starship suckless-tools tcpdump tor torbrowser-launcher tree ufw unzip vim wget whatweb xclip xterm zip zsh zsh-autosuggestions zsh-syntax-highlighting
 ```
 
-Ya instaladas pero utiles.
+Herramientas de pentest/red-team/hacking muy grandes que pueden estar ya instaladas, se recomienda instalar por aparte ya que podrían tardar.
 
 ```bash
-sudo update -y
-sudo apt install -y chromium curl ffuf gcc gettext-base git gzip iptables macchanger make nano net-tools netdiscover netmask nmap openssl openvpn plocate proxychains python-is-python3 python2 python3 python3-pip tcpdump tree ufw unzip vim wget whatweb zip
-```
-
-Herramientas de pentest muy grandes.
-
-```bash
-sudo update -y
 sudo apt install -y burpsuite metasploit-framework wireshark zaproxy
 ```
 
-Extras.
+> Para WSL  `sudo apt install -y bat cmake command-not-found curl dnsutils ffuf flameshot fzf gcc gettext gettext-base gettext-doc gettext-el git gobuster gzip html2text htop httpie iptables jq lsd macchanger make metasploit-framework moreutils nano ncat neovim netdiscover netmask net-tools nmap openssl openvpn p7zip p7zip-full plocate proxychains python2 python3 python3-pip python-is-python3 ranger rlwrap starship suckless-tools tcpdump tor tree ufw unzip vim wget whatweb xclip xterm zip zsh zsh-autosuggestions zsh-syntax-highlighting`
+
+#### Debian
+
+
+```bash
+sudo apt install -y alsa-utils bat cmake command-not-found curl dnsutils docker-compose docker.io flameshot fzf gcc gettext gettext-base gettext-doc gettext-el git gzip html2text htop httpie imagemagick iptables jq kitty lsd make moreutils nano ncat neovim netmask net-tools openssl openvpn p7zip p7zip-full plocate python3 python3-pip python-is-python3 ranger starship suckless-tools tree ufw unzip vim wget xclip xterm zip zsh zsh-autosuggestions zsh-syntax-highlighting
+```
+
+> Para WSL `sudo apt install -y bat cmake command-not-found curl dnsutils flameshot fzf gcc gettext gettext-base gettext-doc gettext-el git gzip html2text htop httpie iptables jq lsd make moreutils nano ncat neovim netmask net-tools openssl openvpn p7zip p7zip-full plocate python3 python3-pip python-is-python3 ranger starship suckless-tools tree ufw unzip vim wget xclip xterm zip zsh zsh-autosuggestions zsh-syntax-highlighting`
+`
+
+#### Extras
+
 
 ```bash
 sudo update -y
 sudo apt install -y libreoffice libreoffice-l10n-es libreoffice-help-es
 ```
 
-### Software que no estan en APT
 
-Instalación manual
+### Software sin repositorios en APT
 
-- [python2-pip](Extras.md#descargar-pip2)
-- [bash-tools](Extras.md#bash-tools)
-- [Powerlevel10k](https://github.com/romkatv/powerlevel10k#manual)
-- [NvChad](https://nvchad.com/docs/quickstart/install)
+Para `pip2` necesitaremos descargar el instalador de forma externa:
 
-### Instalación por repositorios
+
+```bash
+wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
+sudo python2 get-pip.py
+```
+
+Algunas herramientas utiles desarrolladas por mí, aquí el [repositorio](https://github.com/marcvspt/bash-tools). En este entorno, se considera que se pondrán en la ruta `/opt/bin` a diferencia de lo mostrado en el repo:
+
+
+```bash
+user=$(whoami)
+sudo chown $user:$user /opt
+
+mkdir -p /opt/bin
+git clone https://github.com/marcvspt/bash-tools.git
+cd bash-tools/
+cp *.sh /opt/bin
+```
+
+Para el prompt de zsh usaremos [Powerlevel10k](https://github.com/romkatv/powerlevel10k#manual) y para el entorno de Neovim usaremos [NvChad](https://nvchad.com/docs/quickstart/install).
 
 En el caso de `librewolf` en la documentación oficial se explica como instalarlo en Debian: [Installation instructions for Debian based - Main Debian Repository](https://librewolf.net/installation/debian/#main-debian-repository).
 
 Para `brave` podemos encontrar en la documentación oficial como se instala [Release Channel Installation - Debian, Ubuntu, Mint](https://brave.com/linux/#debian-ubuntu-mint).
 
-En el caso de `visual studio code`, podemos usar el **.deb** directamente para instalarlo y automaticamente se instalará el repositorio para futuras actualizaciones o incluimos desde 0 los repositorios de acuerdo a la documentación: [VSCode Debian and Ubuntu based distributions](https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions).
+En el caso de **Visual Studio Code**`, podemos usar el **.deb** directamente para instalarlo y automaticamente se instalará el repositorio para futuras actualizaciones o incluimos desde 0 los repositorios de acuerdo a la documentación: [VSCode Debian and Ubuntu based distributions](https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions).
+
+En el caso de `fnm` se tiene que seguir las instrucciones de su [repositorio](https://github.com/Schniz/fnm#using-a-script-macoslinux).
 
 ### Fuentes
 
@@ -103,6 +122,7 @@ Se necesita también la fuente [Noto Emoji](https://fonts.google.com/noto/specim
 
 Copiar archivos de configuraciones:
 
+
 ```bash
 user=$(whoami)
 sudo chown $user:$user /opt
@@ -126,6 +146,7 @@ Plugins de `zsh`:
 - [**ZSH git plugin**](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh) debe ir en `/opt/zsh-git/`
 
 Haremos links simbólicos a estos archivos para root, de esta forma no necesitaremos instalar de nuevo estas herramientas, temas y configuraciones para root (***NO SE RECOMIENDA EN SERVIDORES PRODUCTIVOS***):
+
 
 ```bash
 user=$(whoami)
