@@ -41,7 +41,7 @@ Herramientas de pentest/red-team/hacking muy grandes que pueden estar ya instala
 sudo apt install -y burpsuite metasploit-framework wireshark zaproxy
 ```
 
-> Para WSL  `sudo apt install -y bat cmake command-not-found curl dnsutils ffuf flameshot fzf gcc gettext gettext-base gettext-doc gettext-el git gobuster gzip html2text htop httpie iptables jq lsd macchanger make metasploit-framework moreutils nano ncat neovim netdiscover netmask net-tools nmap openssl openvpn p7zip p7zip-full plocate proxychains python2 python3 python3-pip python-is-python3 ranger rlwrap starship suckless-tools tcpdump tor tree ufw unzip vim wget whatweb xclip xterm zip zsh zsh-autosuggestions zsh-syntax-highlighting`
+> Para WSL  `sudo apt install -y bat cmake command-not-found curl dnsutils ffuf fzf gcc gettext gettext-base gettext-doc gettext-el git gobuster gzip html2text htop httpie iptables jq lsd macchanger make metasploit-framework moreutils nano ncat neovim netdiscover netmask net-tools nmap openssl openvpn p7zip p7zip-full plocate proxychains python2 python3 python3-pip python-is-python3 ranger rlwrap starship suckless-tools tcpdump tor tree ufw unzip vim wget whatweb xclip xterm zip zsh zsh-autosuggestions zsh-syntax-highlighting`
 
 #### Debian
 
@@ -50,7 +50,7 @@ sudo apt install -y burpsuite metasploit-framework wireshark zaproxy
 sudo apt install -y alsa-utils bat cmake command-not-found curl dnsutils docker-compose docker.io flameshot fzf gcc gettext gettext-base gettext-doc gettext-el git gzip html2text htop httpie imagemagick iptables jq kitty lsd make moreutils nano ncat neovim netmask net-tools openssl openvpn p7zip p7zip-full plocate python3 python3-pip python-is-python3 ranger starship suckless-tools tree ufw unzip vim wget xclip xterm zip zsh zsh-autosuggestions zsh-syntax-highlighting
 ```
 
-> Para WSL `sudo apt install -y bat cmake command-not-found curl dnsutils flameshot fzf gcc gettext gettext-base gettext-doc gettext-el git gzip html2text htop httpie iptables jq lsd make moreutils nano ncat neovim netmask net-tools openssl openvpn p7zip p7zip-full plocate python3 python3-pip python-is-python3 ranger starship suckless-tools tree ufw unzip vim wget xclip xterm zip zsh zsh-autosuggestions zsh-syntax-highlighting`
+> Para WSL `sudo apt install -y bat cmake command-not-found curl dnsutils fzf gcc gettext gettext-base gettext-doc gettext-el git gzip html2text htop httpie iptables jq lsd make moreutils nano ncat neovim netmask net-tools openssl openvpn p7zip p7zip-full plocate python3 python3-pip python-is-python3 ranger starship suckless-tools tree ufw unzip vim wget xclip xterm zip zsh zsh-autosuggestions zsh-syntax-highlighting`
 `
 
 #### Extras
