@@ -13,7 +13,7 @@ Herramientas y configuraciones de terminal para un entorno personalizado de **Ka
     - [TLD o dominio raíz personalizado en navegador web](#tld-o-dominio-raíz-personalizado-en-navegador-web)
     - [Cambiar prompt](#cambiar-prompt)
     - [Herramientas por default](#herramientas-por-default)
-    - [Grupos](#grupos)
+    - [Grupos y shell](#grupos-y-shell)
   - [Errores y soluciones](#errores-y-soluciones)
 
 ## Instalaciones
@@ -133,11 +133,13 @@ cp ./home/zshrc ~/.zshrc
 cp ./home/p10k.zsh ~/.p10k.zsh
 cp ./home/nanorc ~/.nanorc
 cp ./home/vimrc ~/.vimrc
-cp ./home/Xdefaults ~/.Xdefaults
 rm -rf /home/$user/.config/htop 2>/dev/null && cp -r ./config/htop /home/$user/.config/
-rm -rf /home/$user/.config/kitty 2>/dev/null && cp -r ./config/kitty /home/$user/.config/
 rm /home/$user/.config/starship.toml 2>/dev/null && cp ./config/starship.toml /home/$user/.config/starship.toml
 cp -r ./opt/* /opt/
+
+#No necesario en WSL
+cp ./home/Xdefaults ~/.Xdefaults 
+rm -rf /home/$user/.config/kitty 2>/dev/null && cp -r ./config/kitty /home/$user/.config/
 ```
 
 Plugins de `zsh`:
@@ -159,14 +161,16 @@ sudo ln -s -f /home/$user/.zshrc /root/.zshrc
 sudo ln -s -f /home/$user/.p10k.zsh /root/.p10k.zsh
 sudo ln -s -f /home/$user/.nanorc /root/.nanorc
 sudo ln -s -f /home/$user/.vimrc /root/.vimrc
-sudo ln -s -f /home/$user/.Xdefaults /root/.Xdefaults
-sudo ln -s -f /home/$user/.config/kitty/ /root/.config/
 sudo ln -s -f /home/$user/.config/htop/ /root/.config/
 sudo ln -s -f /home/$user/.config/starship.toml /root/.config/starship.toml
 sudo ln -s -f /home/$user/.config/nvim /root/.config/
 sudo ln -s -f /home/$user/.local/share/nvim /root/.local/share/
 sudo ln -s -f /home/$user/.local/state/nvim /root/.local/state/
 sudo ln -s -f /home/$user/powerlevel10k /root/
+
+#No necesario en WSL
+sudo ln -s -f /home/$user/.Xdefaults /root/.Xdefaults
+sudo ln -s -f /home/$user/.config/kitty/ /root/.config/
 ```
 
 ## Opcional
@@ -236,13 +240,29 @@ Se debe buscar los binarios en las rutas `bin` del sistema como:
 - `/usr/sbin`
 - `/usr/local/sbin`
 
-### Grupos
+### Grupos y shell
 
 Algunas herramientas comunes necesitan permisos de **root**, sin embargo, algunos grupos ya tienen esos permisos:
 
 ```bash
 user=$(whoami)
 sudo usermod -aG docker,tcpdump,wireshark,www-data $user
+```
+
+Para configurar por defecto el uso de la `zsh` se debe usar el comando `chsh` y la ruta del ejecutable que puede estar en:
+
+- `/bin`
+- `/usr/bin`
+- `/usr/local/bin`
+- `/sbin`
+- `/usr/sbin`
+- `/usr/local/sbin`
+
+
+```bash
+user=$(whoami)
+sudo chsh -s /bin/zsh $user
+sudo chsh -s /bin/zsh root
 ```
 
 ## Errores y soluciones
