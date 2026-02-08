@@ -152,7 +152,7 @@ Haremos links simbólicos a estos archivos para root, de esta forma no necesitar
 user=$(whoami)
 sudo mkdir -p /root/.local/share/ 2>/dev/null
 sudo mkdir -p /root/.local/state/ 2>/dev/null
-sudo mkdir -p /root/.conf/ 2>/dev/null
+sudo mkdir -p /root/.config/ 2>/dev/null
 
 sudo ln -s -f /home/$user/.bashrc /root/.bashrc
 sudo ln -s -f /home/$user/.zshrc /root/.zshrc
