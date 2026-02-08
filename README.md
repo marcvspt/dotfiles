@@ -91,7 +91,7 @@ En el caso de `librewolf` en la documentación oficial se explica como instalarl
 
 Para `brave` podemos encontrar en la documentación oficial como se instala [Release Channel Installation - Debian, Ubuntu, Mint](https://brave.com/linux/#debian-ubuntu-mint).
 
-En el caso de **Visual Studio Code**`, podemos usar el **.deb** directamente para instalarlo y automaticamente se instalará el repositorio para futuras actualizaciones o incluimos desde 0 los repositorios de acuerdo a la documentación: [VSCode Debian and Ubuntu based distributions](https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions).
+En el caso de **Visual Studio Code**, podemos usar el `.deb` directamente para instalarlo y automaticamente se instalará el repositorio para futuras actualizaciones o incluimos desde 0 los repositorios de acuerdo a la documentación: [VSCode Debian and Ubuntu based distributions](https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions).
 
 En el caso de `fnm` se tiene que seguir las instrucciones de su [repositorio](https://github.com/Schniz/fnm#using-a-script-macoslinux).
 
