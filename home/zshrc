@@ -12,29 +12,70 @@ col_txt_bld_red="${txt_regul}${color_red}"
 col_txt_bld_grn="${txt_bold}${color_green}"
 col_txt_bld_ylw="${txt_bold}${color_yellow}"
 
-### Agregar colores a el comando 'man'
-function man() {
-	/usr/bin/env \
-	LESS_TERMCAP_mb=$(echo -e "${col_txt_bld_red}") \
-	LESS_TERMCAP_md=$(echo -e "${col_txt_bld_red}") \
-	LESS_TERMCAP_me=$(echo -e "${colors_end}") \
-	LESS_TERMCAP_se=$(echo -e "${colors_end}") \
-	LESS_TERMCAP_so=$(echo -e "${col_txt_bld_ylw}") \
-	LESS_TERMCAP_ue=$(echo -e "${colors_end}") \
-	LESS_TERMCAP_us=$(echo -e "${col_txt_bld_grn}") \
-	man "$@"
+# Configuraciones
+## Change cursor shape for different vi modes.
+function zle-keymap-select() {
+	if [[ $KEYMAP == vicmd ]] || [[ $1 = 'block' ]]; then
+		echo -ne '\e[1 q'
+	elif [[ $KEYMAP == main ]] || [[ $KEYMAP == viins ]] || [[ $KEYMAP = '' ]] || [[ $1 = 'beam' ]]; then
+		echo -ne '\e[5 q'
+	fi
+}
+zle -N zle-keymap-select
+
+## Start with beam shape cursor on zsh startup and after every command.
+function zle-line-init() {
+	zle-keymap-select 'beam'
 }
 
-### Colorear 'gcc' warnings & errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+## for setting history length see HISTSIZE and HISTFILESIZE
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=2000
 
-## Rutas
+## Resolve burpsuite problems
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Bindkeys for some shortcuts
+bindkey "^[[H" beginning-of-line	# inicio
+bindkey "^[[F" end-of-line			# fin
+bindkey "^[[3~" delete-char			# delete
+bindkey "^[[1;3C" forward-word		# alt + ->
+bindkey "^[[1;3D" backward-word		# alt + <-
+bindkey '^[[1;5C' forward-word		# ctrl + ->
+bindkey '^[[1;5D' backward-word		# ctrl + <-
+bindkey '^[[3;5~' kill-word			# ctrl + Supr
+bindkey '^U' backward-kill-line		# ctrl + U
+
+# PATH
 main_user="marcvs"
-export PATH="$PATH:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/snap/bin:/usr/games:/usr/local/games:/usr/share/games:/usr/sandbox:/opt/bin:/root/.local/bin:/home/$main_user/.local/bin"
+wanted_paths=(
+    "/usr/local/sbin"
+    "/usr/local/bin"
+    "/usr/sbin"
+    "/usr/bin"
+    "/sbin"
+    "/bin"
+    "/snap/bin"
+    "/opt/bin"
+    "/root/.local/bin"
+	"/usr/games"
+	"/usr/local/games"
+	"/usr/share/games"
+	"/usr/sandbox"
+    "/home/$main_user/.local/bin"
+)
+
+for path_to_add in "${wanted_paths[@]}"; do
+    # Comprobar si el directorio existe y si NO está ya en el PATH
+    if [ -d "$path_to_add" ] && [[ ":$PATH:" != *":$path_to_add:"* ]]; then
+        export PATH="$PATH:$path_to_add"
+    fi
+done
 
 export WEBXML='--stylesheet "https://raw.githubusercontent.com/honze-net/nmap-bootstrap-xsl/master/nmap-bootstrap.xsl"'
 
-### FZF
+## fzf
 FZF_PATH="/home/$main_user/.fzf/bin"
 if [ -d "$FZF_PATH" ]; then
 	export PATH="$FZF_PATH:$PATH"
@@ -45,7 +86,7 @@ else
     : # Nada
 fi
 
-### fnm
+## fnm
 FNM_PATH="/home/$main_user/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
 	export PATH="$FNM_PATH:$PATH"
@@ -208,7 +249,7 @@ alias mv="/bin/mv -i"
 alias rm="/bin/rm -I"
 alias history="history 0"
 
-## Agregar colores a algunos comandos
+# Agregar colores
 alias dir='/usr/bin/dir --color=auto'
 alias vdir='/usr/bin/vdir --color=auto'
 alias grep='/usr/bin/grep --color=auto'
@@ -217,40 +258,21 @@ alias egrep='/usr/bin/egrep --color=auto'
 alias diff='/usr/bin/diff --color=auto'
 alias ip='/usr/bin/ip --color=auto'
 
-# Configuraciones
-## Change cursor shape for different vi modes.
-function zle-keymap-select() {
-	if [[ $KEYMAP == vicmd ]] || [[ $1 = 'block' ]]; then
-		echo -ne '\e[1 q'
-	elif [[ $KEYMAP == main ]] || [[ $KEYMAP == viins ]] || [[ $KEYMAP = '' ]] || [[ $1 = 'beam' ]]; then
-		echo -ne '\e[5 q'
-	fi
-}
-zle -N zle-keymap-select
-
-## Start with beam shape cursor on zsh startup and after every command.
-function zle-line-init() {
-	zle-keymap-select 'beam'
+## Colores para comando 'man'
+function man() {
+	/usr/bin/env \
+	LESS_TERMCAP_mb=$(echo -e "${col_txt_bld_red}") \
+	LESS_TERMCAP_md=$(echo -e "${col_txt_bld_red}") \
+	LESS_TERMCAP_me=$(echo -e "${colors_end}") \
+	LESS_TERMCAP_se=$(echo -e "${colors_end}") \
+	LESS_TERMCAP_so=$(echo -e "${col_txt_bld_ylw}") \
+	LESS_TERMCAP_ue=$(echo -e "${colors_end}") \
+	LESS_TERMCAP_us=$(echo -e "${col_txt_bld_grn}") \
+	man "$@"
 }
 
-## for setting history length see HISTSIZE and HISTFILESIZE
-HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=2000
-
-## Resolve burpsuite problems
-export _JAVA_AWT_WM_NONREPARENTING=1
-
-# Bindkeys for some shortcuts
-bindkey "^[[H" beginning-of-line	# inicio
-bindkey "^[[F" end-of-line			# fin
-bindkey "^[[3~" delete-char			# delete
-bindkey "^[[1;3C" forward-word		# alt + ->
-bindkey "^[[1;3D" backward-word		# alt + <-
-bindkey '^[[1;5C' forward-word		# ctrl + ->
-bindkey '^[[1;5D' backward-word		# ctrl + <-
-bindkey '^[[3;5~' kill-word			# ctrl + Supr
-bindkey '^U' backward-kill-line		# ctrl + U
+## Colores de advertencias y errores para comando 'gcc' 
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Funciones custom
 ## Crear directorios para pentest/CTFs
@@ -278,13 +300,6 @@ function extract_ports() {
 	fi
 
 	/usr/bin/rm extractPorts.tmp
-}
-
-## Colocar el 'target' en la polybar
-function set_target() {
-	local host=$1
-	local name=$2
-	echo "$host $name" > /opt/help/target
 }
 
 ## Eliminar archivos con técnicas anti recuperación

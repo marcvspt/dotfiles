@@ -59,6 +59,8 @@ shopt -s globstar
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/usr/bin/sh lesspipe)"
 
+
+# Configuración de prompt
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 	debian_chroot=$(/usr/bin/cat /etc/debian_chroot)
@@ -87,11 +89,10 @@ if [ -n "$force_color_prompt" ]; then
 	fi
 fi
 
-# PROMPT CONFIGURATION
-## Use starship
-#eval "$(/usr/bin/starship init bash)"
+## Usar starship
+eval "$(/usr/bin/starship init bash)"
 
-## Prompt for debian, ubuntu, etc.
+## Prompt para debian, ubuntu, etc.
 if [ "$color_prompt" = yes ]; then
 	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
@@ -99,7 +100,7 @@ else
 fi
 unset color_prompt force_color_prompt
 
-## Prompt for centos, fedora, arch, etc.
+## Prompt estilo centos, fedora, arch, etc.
 #if [ $EUID -eq 0 ]; then
 #	export PS1="${col_txt_bld_blu}[${col_txt_bld_wht}\u@\H ${col_txt_bld_pur}\w${col_txt_bld_blu}] ${col_txt_bld_red}# ${colors_end}"
 #else
@@ -134,19 +135,13 @@ if [ -x /usr/bin/dircolors ]; then
 	alias egrep='/usr/bin/egrep --color=auto'
 fi
 
-# Some more 'ls' aliases
-alias ll='ls -lCF'
-alias la='ls -ACF'
-alias lla='ls -lACF'
-
-# Set colors
-## Colored 'gcc' warnings and errors
+## Colores de advertencias y errores para comando 'gcc' 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-## Colored 'ip' command
+## Colores para comando 'ip'
 alias ip='/usr/bin/ip --color=auto'
 
-## Set 'man' colors
+## Colores para comando 'man'
 function man() {
 	/usr/bin/env \
 	LESS_TERMCAP_mb=$(echo -e "${col_txt_bld_red}") \
@@ -179,12 +174,74 @@ if ! shopt -oq posix; then
 	fi
 fi
 
+## Custom
+alias vi='/usr/bin/nvim'
+alias vim='/usr/bin/nvim'
+
+if command -v bat >/dev/null 2>&1; then
+    alias cat='/usr/bin/bat'
+    alias catn='/usr/bin/bat --style=plain'
+    alias catp='/usr/bin/bat --paging=never'
+    alias catnp='/usr/bin/bat --style=plain --paging=never'
+elif command -v batcat >/dev/null 2>&1; then
+    alias cat='/usr/bin/batcat'
+    alias catn='/usr/bin/batcat --style=plain'
+    alias catp='/usr/bin/batcat --paging=never'
+    alias catnp='/usr/bin/batcat --style=plain --paging=never'
+else
+    : # Nada
+fi
+
+if command -v lsd >/dev/null 2>&1; then
+	alias ls='/usr/bin/lsd -F --group-directories-first --color=auto'
+	alias ll='/usr/bin/lsd -lF --group-directories-first --color=auto'
+	alias la='/usr/bin/lsd -AF --group-directories-first --color=auto'
+	alias lla='/usr/bin/lsd -lAF --group-directories-first --color=auto'
+else
+	alias ls='/usr/bin/ls -CF --group-directories-first --color=auto'
+	alias ll='/usr/bin/ls -lCF --group-directories-first --color=auto'
+	alias la='/usr/bin/ls -ACF --group-directories-first --color=auto'
+	alias lla='/usr/bin/ls -lACF --group-directories-first --color=auto'
+fi
+
+alias bashrconfig="/usr/bin/nvim ~/.bashrc"
+
+alias cp="/bin/cp -i"
+alias mv="/bin/mv -i"
+alias rm="/bin/rm -I"
+alias history="history 0"
+
+alias ll='ls -lCF'
+alias la='ls -ACF'
+alias lla='ls -lACF'
+
+# PATH
 main_user="marcvs"
-export PATH="$PATH:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/snap/bin:/usr/games:/usr/local/games:/usr/share/games:/usr/sandbox:/opt/bin:/root/.local/bin:/home/$main_user/.local/bin"
+wanted_paths=(
+    "/usr/local/sbin"
+    "/usr/local/bin"
+    "/usr/sbin"
+    "/usr/bin"
+    "/sbin"
+    "/bin"
+    "/snap/bin"
+    "/opt/bin"
+    "/root/.local/bin"
+	"/usr/games"
+	"/usr/local/games"
+	"/usr/share/games"
+	"/usr/sandbox"
+    "/home/$main_user/.local/bin"
+)
 
-alias bashrconfig="vim ~/.bashrc"
+for path_to_add in "${wanted_paths[@]}"; do
+    # Comprobar si el directorio existe y si NO está ya en el PATH
+    if [ -d "$path_to_add" ] && [[ ":$PATH:" != *":$path_to_add:"* ]]; then
+        export PATH="$PATH:$path_to_add"
+    fi
+done
 
-# FZF
+## fzf
 FZF_PATH="/home/$main_user/.fzf/bin"
 if [ -d "$FZF_PATH" ]; then
 	export PATH="$FZF_PATH:$PATH"
@@ -195,7 +252,7 @@ else
     : # Nada
 fi
 
-# fnm
+## fnm
 FNM_PATH="/home/$main_user/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
 	export PATH="$FNM_PATH:$PATH"
@@ -203,3 +260,51 @@ if [ -d "$FNM_PATH" ]; then
 else
     : # Nada
 fi
+
+# Funciones cutom
+## Formato de 'PS Credential' de Windows
+function ps_credential() {
+	if command -v bat >/dev/null 2>&1; then
+		/usr/bin/bat -l powershell --paging=never /opt/help/pscredential
+	elif command -v batcat >/dev/null 2>&1; then
+		/usr/bin/batcat -l powershell --paging=never /opt/help/pscredential
+	else
+		/usr/bin/cat /opt/help/pscredential
+	fi
+}
+
+## Comandos para persistencia en Windows
+function persistence() {
+	if command -v bat >/dev/null 2>&1; then
+		/usr/bin/bat -l cmd --paging=never /opt/help/persistence
+	elif command -v batcat >/dev/null 2>&1; then
+		/usr/bin/batcat -l cmd --paging=never /opt/help/persistence
+	else
+		/usr/bin/cat /opt/help/persistence
+	fi
+}
+
+## Comandos para crear certificados digitales
+function create_cert() {
+	if command -v bat >/dev/null 2>&1; then
+		/usr/bin/bat -l bash --paging=never /opt/help/createcert
+	elif command -v batcat >/dev/null 2>&1; then
+		/usr/bin/batcat -l bash --paging=never /opt/help/createcert
+	else
+		/usr/bin/cat /opt/help/createcert
+	fi
+}
+
+## Escanear redes Wi-Fi cercanas
+function wifi_scan() {
+	/usr/bin/nmcli dev wifi list
+}
+
+## Connectars a Wi-Fi con y sin contraseña
+function wifi_connect() {
+	if [ $2 ]; then
+		/usr/bin/nmcli dev wifi connect $1 password $2
+	elif [ !$2 ]; then
+		/usr/bin/nmcli dev wifi connect $1
+	fi
+}

@@ -134,7 +134,7 @@ cp ./home/p10k.zsh ~/.p10k.zsh
 cp ./home/nanorc ~/.nanorc
 cp ./home/vimrc ~/.vimrc
 rm -rf /home/$user/.config/htop 2>/dev/null && cp -r ./config/htop /home/$user/.config/
-rm /home/$user/.config/starship.toml 2>/dev/null && cp ./config/starship.toml /home/$user/.config/starship.toml
+rm -f /home/$user/.config/starship.toml 2>/dev/null && cp ./config/starship.toml /home/$user/.config/starship.toml
 cp -r ./opt/* /opt/
 
 #No necesario en WSL
