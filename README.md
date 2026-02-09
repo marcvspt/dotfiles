@@ -51,7 +51,6 @@ sudo apt install -y alsa-utils bat cmake command-not-found curl dnsutils docker-
 ```
 
 > Para WSL `sudo apt install -y bat cmake command-not-found curl dnsutils fzf gcc gettext gettext-base gettext-doc gettext-el git gzip html2text htop httpie iptables jq lsd make moreutils nano ncat neovim netmask net-tools openssl openvpn p7zip p7zip-full plocate python3 python3-pip python-is-python3 ranger starship suckless-tools tree ufw unzip vim wget xclip xterm zip zsh zsh-autosuggestions zsh-syntax-highlighting`
-`
 
 #### Extras
 
